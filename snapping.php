@@ -19,6 +19,7 @@
 <html>
 <head>
 	<title><?php echo $snapping[0]["location"]; ?></title>
+	<script src="scripts/snapping.js"></script>
 </head>
 <body>
 	<?php
@@ -28,6 +29,7 @@
 
 		if (0 == strcmp($user_id, $snapping[0]["fk_user_id"])) {
 			echo '<a href="editSnapping.php?snapping='.$snapping_id.'">Edit</a>';
+			echo '<button onclick="deleteSnapping('.$snapping_id.')">Delete</button>';
 		}
 		echo '<div>'.$snapping[0]["description"].'</div>';
 	?>

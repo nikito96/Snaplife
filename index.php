@@ -12,8 +12,8 @@
 	</head>
 	<body>
 		<form action="services/login.php" method="post">
-			<label for="email">Email</label><input type="text" name="email" id="email"><br>
-			<label for="password">Password</label><input type="password" name="password" id="password"><br>
+			<label for="email">Email:</label><input type="text" name="email" id="email"><br>
+			<label for="password">Password:</label><input type="password" name="password" id="password"><br>
 			<?php
 				if (isset($_GET["badLogin"])) {
 					echo '<div>Wrong email or password!</div>';
