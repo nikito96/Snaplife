@@ -22,6 +22,8 @@
             echo "Connection failed: " . $e->getMessage();
         }
 
+        echo '<br>';
+
         if($stmt->rowCount() > 0){
             foreach($snappings as $snapping){ 
                 $postID = $snapping["snapping_id"];
