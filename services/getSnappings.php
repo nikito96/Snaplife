@@ -23,6 +23,7 @@
         }
 
         echo '<br>';
+        echo '<br>';
 
         if($stmt->rowCount() > 0){
             foreach($snappings as $snapping){ 
@@ -40,6 +41,7 @@
                     echo "<p>Location: ".$snapping["real_world_location"]."</p>";
                 }
                 echo '<a href="snapping.php?snapping='.$snapping["snapping_id"].'"><img src="snappings/'.$snapping["location"].'"/></a>';
+                echo '<div>Created on '.$snapping["date"].'</div>';
                 echo '<p>'.$snapping["description"].'</p>';
                 echo '</div>';
             }

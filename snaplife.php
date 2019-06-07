@@ -21,7 +21,6 @@
 	<a href="services/logout.php">Log out</a>
 	<br>
 	<br>
-	<br>
 	<div id="postList">
 <?php
 	require_once("services/dbConn.php");
@@ -46,6 +45,7 @@
                     echo "<p>Location: ".$snapping["real_world_location"]."</p>";
                 }
 				echo '<a href="snapping.php?snapping='.$snapping["snapping_id"].'"><img src="snappings/'.$snapping["location"].'"/></a>';
+				echo '<div>Created on '.$snapping["date"].'</div>';
 				echo '<p>'.$snapping["description"].'</p>';
 				echo '</div>';
 			}
