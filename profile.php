@@ -25,7 +25,7 @@
 	<p><?php echo $user[0]["info"]; ?></p>
 	<?php
 		if(isset($_SESSION["user"]) && 0 == strcmp($username, $_SESSION["username"])){
-				echo '<a href="editProfile.php">Edit</a>';
+			echo '<a href="editProfile.php">Edit</a>';
 		}
 	?>
 </body>
