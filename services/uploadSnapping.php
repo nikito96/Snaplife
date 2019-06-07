@@ -11,36 +11,40 @@
 	$description = $_POST["description"];
 	$real_world_location = $_POST["real_world_location"];
 
-	$check = getimagesize($_FILES["snapping"]["tmp_name"]);
-
 	$errors = array(
 		"snapping" => array(),
 		"description" => array(),
 		"location" => array()
 	);
 
+	if (0 == strcmp($_FILES["snapping"]["name"], "")) {
+		$errors["snapping"][] = "No snapping selected!";
+	} else {
+		$check = getimagesize($_FILES["snapping"]["tmp_name"]);
+
+		if($check !== false) {
+	        $uploadOk = 1;
+	    } else {
+	        $errors["snapping"][] = "File is not an image.";
+	        $uploadOk = 0;
+	    }
+
+	    if (file_exists($target_snapping)) {
+		    $errors["snapping"][] = "Sorry, file already exists.";
+		    $uploadOk = 0;
+		}
+
+		if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
+		    $errors["snapping"][] = "Sorry, only JPG, JPEG & PNG files are allowed.";
+		    $uploadOk = 0;
+		}
+	}
+
 	if (strlen($description) > 255) {
 		$errors["description"][] = "Snapping's description can not be more than 255 characters!";
 	}
 	if (strlen($real_world_location) > 100) {
 		$errors["location"][] = "Location can not be more than 100 characters!";
-	}
-
-	if($check !== false) {
-        $uploadOk = 1;
-    } else {
-        $errors["snapping"][] = "File is not an image.";
-        $uploadOk = 0;
-    }
-
-    if (file_exists($target_snapping)) {
-	    $errors["snapping"][] = "Sorry, file already exists.";
-	    $uploadOk = 0;
-	}
-
-	if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
-	    $errors["snapping"][] = "Sorry, only JPG, JPEG & PNG files are allowed.";
-	    $uploadOk = 0;
 	}
 
 	$count = 0;
