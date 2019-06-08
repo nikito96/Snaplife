@@ -161,7 +161,7 @@
 					} catch (PDOException $e) {
 						echo "Error: " . $e->getMessage();
 					}
-					header("Location: ../editProfile.php");
+					header("Location: ../editProfile.php?user=".$user_id);
 			    } else {
 			        $errors[] = "Sorry, there was an error uploading your file.";
 			        header("Location: ../editProfile.php?user=".$user_id);
@@ -195,9 +195,9 @@
 				$stmt->execute();
 
 	            unlink("../profile_pics/".$query[0]["profile_pic"]);
-	            header("Location: ../editProfile.php");
+	            header("Location: ../editProfile.php?user=".$user_id);
 	        } else{
-	        	header("Location: ../editProfile.php");
+	        	header("Location: ../editProfile.php?user=".$user_id);
 	        }
 		} catch (PDOException $e) {
 			echo "Error: " . $e->getMessage();
