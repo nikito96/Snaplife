@@ -6,7 +6,7 @@
 		header("Location: index.php");
 	}
 
-	$user_id = $_SESSION["user"];
+	$user_id = $_GET["user"];
 
 	try {
 		$stmt = $conn->prepare("SELECT * FROM account WHERE user_id=:user_id");
@@ -15,6 +15,13 @@
 
 		$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
 		$user = $stmt->fetchAll();
+
+		if (0 != strcmp($user_id, $user[0]["user_id"]) && 0 != strcmp($_SESSION["permission"], "admin")) {
+			$user_id = $_SESSION["user"];
+			$stmt->bindParam(":user_id", $user_id);
+			$stmt->execute();
+			$user = $stmt->fetchAll();
+		}
 	} catch (PDOException $e) {
 		echo "Error: " . $e->getMessage();
 	}
@@ -49,6 +56,7 @@
 				}
 			}
 		?>
+		<input type="hidden" name="user_id" value="<?php echo $user[0]["user_id"]; ?>">
 		<input type="submit" name="edit" value="Edit">
 	</form>
 	<a href="services/edit.php?profile-pic=default">Set default profile picture</a>
@@ -97,6 +105,7 @@
 				}
 			}
 		?>
+		<input type="hidden" name="user_id" value="<?php echo $user[0]["user_id"]; ?>">
 		<input type="submit" name="secured-edit" value="Edit">
 	</form>
 </body>

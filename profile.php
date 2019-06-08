@@ -24,8 +24,9 @@
 	<img src="profile_pics/<?php echo $user[0]["profile_pic"] ?>"/>
 	<p><?php echo $user[0]["info"]; ?></p>
 	<?php
-		if(isset($_SESSION["user"]) && 0 == strcmp($username, $_SESSION["username"])){
-			echo '<a href="editProfile.php">Edit</a>';
+		if(isset($_SESSION["user"]) && (0 == strcmp($username, $_SESSION["username"]) 
+			|| 0 == strcmp($_SESSION["permission"], "ADMIN"))){
+			echo '<a href="editProfile.php?user='.$user[0]["user_id"].'">Edit</a>';
 		}
 	?>
 </body>

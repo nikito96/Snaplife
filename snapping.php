@@ -27,7 +27,8 @@
 		echo '<div>'.$snapping[0]["date"].'</div>';
 		echo '<div>'.$snapping[0]["real_world_location"].'</div>';
 
-		if (0 == strcmp($user_id, $snapping[0]["fk_user_id"])) {
+		if (0 == strcmp($user_id, $snapping[0]["fk_user_id"]) || 
+			0 == strcmp($_SESSION["permission"], "ADMIN")) {
 			echo '<a href="editSnapping.php?snapping='.$snapping_id.'">Edit</a>';
 			echo '<button onclick="deleteSnapping('.$snapping_id.')">Delete</button>';
 		}

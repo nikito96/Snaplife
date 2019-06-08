@@ -5,6 +5,7 @@
 	$user_id = $_SESSION["user"];
 
 	if(isset($_POST["secured-edit"])){
+		$user_id = $_POST["user_id"];
 		$username = $_POST["username"];
 		$password = $_POST["password"];
 		$confirm_password = $_POST["confirm_password"];
@@ -46,7 +47,8 @@
 				$errors["email"][] = "Invalid email format!";
 			}
 
-			if(!password_verify($pass_auth, $pass_cmp[0]["password"])){
+			if(!password_verify($pass_auth, $pass_cmp[0]["password"])
+			 && strcmp($_SESSION["permission"], "ADMIN")){
 				$errors["pass_auth"][] = "Wrong authentication password!";
 			}
 
@@ -70,17 +72,17 @@
 					if (strlen($password) < 6 || strlen($password) > 20) {
 						$errors["password"][] = "Password should be between 6 and 20 characters!";
 						$_SESSION["errors"] = $errors;
-						header("Location: ../editProfile.php");
+						header("Location: ../editProfile.php?user=".$user_id);
 					} else {
 						if (strcmp($password, $confirm_password) == 0) {
 							$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 							$stmt->bindParam(":password", $hashedPassword);
 							$stmt->execute();
-							header("Location: ../editProfile.php");
+							header("Location: ../editProfile.php?user=".$user_id);
 						} else {
 							$errors["confirm_password"][] = "Passwords do not match!";
 							$_SESSION["errors"] = $errors;
-							header("Location: ../editProfile.php");
+							header("Location: ../editProfile.php?user=".$user_id);
 						}
 					}
 				} else {
@@ -88,23 +90,23 @@
 						(strlen($password) == 0 && strlen($confirm_password) > 0)) {
 						$errors["confirm_password"][] = "Passwords do not match!";
 						$_SESSION["errors"] = $errors;
-						header("Location: ../editProfile.php");
+						header("Location: ../editProfile.php?user=".$user_id);
 					} else {
 						$stmt->bindParam(":password", $pass_cmp[0]["password"]);
 						$stmt->execute();
-						header("Location: ../editProfile.php");
+						header("Location: ../editProfile.php?user=".$user_id);
 					}
 				}
 			} else{
 				$_SESSION["errors"] = $errors;
-				header("Location: ../editProfile.php");
+				header("Location: ../editProfile.php?user=".$user_id);
 			}
 		} catch (PDOException $e) {
 			echo "Error: " . $e->getMessage();
 		}
 	} elseif(isset($_POST["edit"])) {
 		$info = $_POST["info"];
-		$user_id = $_SESSION["user"];
+		$user_id = $_POST["user_id"];
 		if (0 != strcmp($_FILES["profile-pic"]["name"], "")) {
 
 			$profile_pics_dir = "../profile_pics/";
@@ -144,7 +146,7 @@
 
 			if ($count > 0) {
 				$_SESSION["errors"] = $errors;
-				header("Location: ../editProfile.php");
+				header("Location: ../editProfile.php?user=".$user_id);
 			} else {
 				if (move_uploaded_file($_FILES["profile-pic"]["tmp_name"], $target_profile_pic)) {
 					$profile_pic = basename($_FILES["profile-pic"]["name"]);
@@ -162,7 +164,7 @@
 					header("Location: ../editProfile.php");
 			    } else {
 			        $errors[] = "Sorry, there was an error uploading your file.";
-			        header("Location: ../editProfile.php");
+			        header("Location: ../editProfile.php?user=".$user_id);
 			    }
 			}	
 		} else {
@@ -176,7 +178,7 @@
 			} catch (PDOException $e) {
 				echo "Error: " . $e->getMessage();
 			}
-			header("Location: ../editProfile.php");
+			header("Location: ../editProfile.php?user=".$user_id);
 		}
 	}
 

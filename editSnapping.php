@@ -12,7 +12,8 @@
 
 			$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
 			$snapping = $stmt->fetchAll();
-			if(0 == strcmp($user_id, $snapping[0]["fk_user_id"])){
+			if(0 == strcmp($user_id, $snapping[0]["fk_user_id"]) 
+				|| 0 == strcmp($_SESSION["permission"], "ADMIN")){
 				$errors = array();
 				if (isset($_SESSION["errors"])) {
 					$errors = $_SESSION["errors"];
