@@ -18,3 +18,23 @@ $(document).ready(function(){
         }
     });
 });
+function likeDislike(action, user_id, snapping_id){
+    var xhttp;
+    var data = [action, user_id, snapping_id];
+    data = JSON.stringify(data);
+    xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var likes = xhttp.responseText;
+            document.getElementById("snapping"+snapping_id).innerHTML = likes;
+        }
+    };
+    xhttp.open("POST", "services/postsActions.php", true);
+    if (action == 1) {
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("data="+data);
+    } else {
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("data="+data);
+    }    
+}
