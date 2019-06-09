@@ -30,11 +30,6 @@ function likeDislike(action, user_id, snapping_id){
         }
     };
     xhttp.open("POST", "services/postsActions.php", true);
-    if (action == 1) {
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send("data="+data);
-    } else {
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send("data="+data);
-    }    
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("data="+data); 
 }
