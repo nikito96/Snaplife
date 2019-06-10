@@ -107,18 +107,19 @@
 	} elseif(isset($_POST["edit"])) {
 		$info = $_POST["info"];
 		$user_id = $_POST["user_id"];
+
+		$errors = array(
+			"snapping" => array(),
+			"info" => array()
+		);
+
 		if (0 != strcmp($_FILES["profile-pic"]["name"], "")) {
 
 			$profile_pics_dir = "../profile_pics/";
 			$target_profile_pic = $profile_pics_dir . basename($_FILES["profile-pic"]["name"]);
 			$imageFileType = strtolower(pathinfo($target_profile_pic,PATHINFO_EXTENSION));
 
-			$check = getimagesize($_FILES["profile-pic"]["tmp_name"]);
-
-			$errors = array(
-				"snapping" => array(),
-				"info" => array()
-			);
+			$check = getimagesize($_FILES["profile-pic"]["tmp_name"]);	
 
 			if (strlen($info) > 255) {
 				$errors["info"][] = "Profile info can not be more than 255 characters!";
@@ -168,17 +169,35 @@
 			    }
 			}	
 		} else {
-			try {
-				$stmt = $conn->prepare("UPDATE account
-					SET info = :info
-						WHERE user_id = :user_id");
-				$stmt->bindParam(":info", $info);
-				$stmt->bindParam(":user_id", $user_id);
-				$stmt->execute();
-			} catch (PDOException $e) {
-				echo "Error: " . $e->getMessage();
+
+			if (strlen($info) > 255) {
+				$errors["info"][] = "Profile info can not be more than 255 characters!";
 			}
-			header("Location: ../editProfile.php?user=".$user_id);
+
+			$count = 0;
+
+			foreach ($errors as $value) {
+				if(count($value) > 0){
+					$count++;
+				}
+			}
+
+			if ($count > 0) {
+				$_SESSION["errors"] = $errors;
+				header("Location: ../editProfile.php?user=".$user_id);
+			} else {
+				try {
+					$stmt = $conn->prepare("UPDATE account
+						SET info = :info
+							WHERE user_id = :user_id");
+					$stmt->bindParam(":info", $info);
+					$stmt->bindParam(":user_id", $user_id);
+					$stmt->execute();
+				} catch (PDOException $e) {
+					echo "Error: " . $e->getMessage();
+				}
+				header("Location: ../editProfile.php?user=".$user_id);
+			}
 		}
 	}
 
