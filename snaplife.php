@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	require_once("services/dbConn.php");
 	if(!isset($_SESSION["user"])){
 		session_destroy();
 		header("Location: index.php");
@@ -50,11 +51,14 @@
 	<a href="addSnapping.php">Add Snapping</a>
 	<a href="profile.php?user=<?php echo $_SESSION['username'] ?>"><?php echo $_SESSION["username"]; ?></a>
 	<a href="services/logout.php">Log out</a>
-	<br>
+	<form action="services/search.php" method="POST">
+		<label for="username"></label>
+		<input type="text" name="username" id="username">
+		<input type="submit" name="search" value="Search">
+	</form>
 	<br>
 	<div id="postList">
 <?php
-	require_once("services/dbConn.php");
 	try{
 		$stmt = $conn->prepare("SELECT * FROM snapping ORDER BY snapping_id DESC LIMIT 2");
 		$stmt->execute();
