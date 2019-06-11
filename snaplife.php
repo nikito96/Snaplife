@@ -7,13 +7,17 @@
 	}
 
 	function buttonLikeDislike($snapping_id, $user_id, $snapping, $conn){
-		$stmt = $conn->prepare("SELECT * FROM liked_snapping WHERE 
-			fk_user_id = :user_id AND fk_snapping_id = :snapping_id");
-		$stmt->bindParam(":user_id", $user_id);
-		$stmt->bindParam(":snapping_id", $snapping_id);
-		$stmt->execute();
-		$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-	    $query = $stmt->fetchAll();
+		try {
+			$stmt = $conn->prepare("SELECT * FROM liked_snapping WHERE 
+				fk_user_id = :user_id AND fk_snapping_id = :snapping_id");
+			$stmt->bindParam(":user_id", $user_id);
+			$stmt->bindParam(":snapping_id", $snapping_id);
+			$stmt->execute();
+			$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+		    $query = $stmt->fetchAll();
+	    } catch (PDOException $e) {
+			echo "Connection failed: " . $e->getMessage();
+		}
 
 	    $liked = count($query);
 

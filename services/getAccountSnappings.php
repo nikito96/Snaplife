@@ -5,6 +5,7 @@
         require_once("../services/dbConn.php");
 
         function buttonLikeDislike($snapping_id, $user_id, $snapping, $conn){
+            try {
             $stmt = $conn->prepare("SELECT * FROM liked_snapping WHERE 
                 fk_user_id = :user_id AND fk_snapping_id = :snapping_id");
             $stmt->bindParam(":user_id", $user_id);
@@ -12,6 +13,9 @@
             $stmt->execute();
             $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $query = $stmt->fetchAll();
+            } catch (PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
+            }
 
             $liked = count($query);
 
