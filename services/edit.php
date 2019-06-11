@@ -202,6 +202,7 @@
 	}
 
 	if (isset($_GET["profile-pic"])) {
+		$user_id = $_GET["user"];
 		try {
 			$stmt = $conn->prepare("SELECT profile_pic FROM account WHERE user_id = :user_id");
 			$stmt->bindParam(":user_id", $user_id);

@@ -59,7 +59,7 @@
 		<input type="hidden" name="user_id" value="<?php echo $user[0]["user_id"]; ?>">
 		<input type="submit" name="edit" value="Edit">
 	</form>
-	<a href="services/edit.php?profile-pic=default">Set default profile picture</a>
+	<a href="services/edit.php?profile-pic=default&user=<?php echo $user[0]["user_id"]; ?>">Set default profile picture</a>
 	<form action="services/edit.php" method="post">
 		<label for="username">Username:</label>
 		<input type="text" name="username" value="<?php echo $user[0]["username"]; ?>" id="username">
