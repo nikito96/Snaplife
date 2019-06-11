@@ -18,6 +18,7 @@ $(document).ready(function(){
         }
     });
 });
+
 function likeDislike(action, user_id, snapping_id){
     var xhttp;
     var data = [action, user_id, snapping_id];
