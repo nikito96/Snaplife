@@ -8,29 +8,30 @@
 
 	$user_id = $_GET["user"];
 
-	try {
-		$stmt = $conn->prepare("SELECT * FROM account WHERE user_id=:user_id");
-		$stmt->bindParam(":user_id", $user_id);
-		$stmt->execute();
+	if(0 == strcmp($user_id, $_SESSION["user"]) || 0 == strcmp($_SESSION["permission"], "ADMIN")){
 
-		$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-		$user = $stmt->fetchAll();
+		try {
+			$stmt = $conn->prepare("SELECT * FROM account WHERE user_id=:user_id");
+			$stmt->bindParam(":user_id", $user_id);
+			$stmt->execute();
 
-		if (0 != strcmp($user_id, $user[0]["user_id"]) && 0 != strcmp($_SESSION["permission"], "admin")) {
+			$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+			$user = $stmt->fetchAll();
+
+
 			$user_id = $_SESSION["user"];
 			$stmt->bindParam(":user_id", $user_id);
 			$stmt->execute();
 			$user = $stmt->fetchAll();
+		} catch (PDOException $e) {
+			echo "Error: " . $e->getMessage();
 		}
-	} catch (PDOException $e) {
-		echo "Error: " . $e->getMessage();
-	}
 
-	$errors = array();
+		$errors = array();
 
-	if (isset($_SESSION["errors"])) {
-		$errors = $_SESSION["errors"];
-	}
+		if (isset($_SESSION["errors"])) {
+			$errors = $_SESSION["errors"];
+		}
 ?>
 
 <html>
@@ -111,6 +112,9 @@
 </body>
 </html>
 <?php
+	} else {
+		header("Location: snaplife.php");
+	}
 	$conn = NULL;
 	$_SESSION["errors"] = NULL;
 ?>

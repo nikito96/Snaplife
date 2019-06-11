@@ -2,7 +2,7 @@
 	session_start();
 	require_once("dbConn.php");
 
-	$user_id = $_SESSION["user"];
+	//$user_id = $_SESSION["user"]; not sure if needed
 
 	if(isset($_POST["secured-edit"])){
 		$user_id = $_POST["user_id"];
@@ -203,24 +203,28 @@
 
 	if (isset($_GET["profile-pic"])) {
 		$user_id = $_GET["user"];
-		try {
-			$stmt = $conn->prepare("SELECT profile_pic FROM account WHERE user_id = :user_id");
-			$stmt->bindParam(":user_id", $user_id);
-			$stmt->execute();
-			$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-	        $query = $stmt->fetchAll();
-			if (0 != strcmp("default-profile-pic.png", $query[0]["profile_pic"])) {
-				$stmt = $conn->prepare("UPDATE account
-					SET profile_pic = 'default-profile-pic.png'");
+		if(0 == strcmp($user_id, $_SESSION["user"]) || 0 == strcmp($_SESSION["permission"], "ADMIN")){
+			try {
+				$stmt = $conn->prepare("SELECT profile_pic FROM account WHERE user_id = :user_id");
+				$stmt->bindParam(":user_id", $user_id);
 				$stmt->execute();
+				$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+		        $query = $stmt->fetchAll();
+				if (0 != strcmp("default-profile-pic.png", $query[0]["profile_pic"])) {
+					$stmt = $conn->prepare("UPDATE account
+						SET profile_pic = 'default-profile-pic.png'");
+					$stmt->execute();
 
-	            unlink("../profile_pics/".$query[0]["profile_pic"]);
-	            header("Location: ../editProfile.php?user=".$user_id);
-	        } else{
-	        	header("Location: ../editProfile.php?user=".$user_id);
-	        }
-		} catch (PDOException $e) {
-			echo "Error: " . $e->getMessage();
+		            unlink("../profile_pics/".$query[0]["profile_pic"]);
+		            header("Location: ../editProfile.php?user=".$user_id);
+		        } else{
+		        	header("Location: ../editProfile.php?user=".$user_id);
+		        }
+			} catch (PDOException $e) {
+				echo "Error: " . $e->getMessage();
+			}
+		} else {
+			header("Location: ../snaplife.php");
 		}
 	}
 

@@ -4,7 +4,7 @@ function deleteSnapping(snapping_id){
     	xhttp = new XMLHttpRequest();
     	xhttp.onreadystatechange = function() {
 		    if (this.readyState == 4 && this.status == 200) {
-		    	alert(xhttp.responseText);
+		    	window.location = "snaplife.php";
 		    }
 		};
 		xhttp.open("GET", "services/deleteSnapping.php?snapping="+snapping_id, true);
