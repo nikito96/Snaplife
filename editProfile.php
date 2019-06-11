@@ -17,12 +17,6 @@
 
 			$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
 			$user = $stmt->fetchAll();
-
-
-			$user_id = $_SESSION["user"];
-			$stmt->bindParam(":user_id", $user_id);
-			$stmt->execute();
-			$user = $stmt->fetchAll();
 		} catch (PDOException $e) {
 			echo "Error: " . $e->getMessage();
 		}
