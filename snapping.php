@@ -15,7 +15,7 @@
 		echo "Connection failed: " . $e->getMessage();
 	}
 
-	function buttonLikeDislike($snapping_id, $user_id, $snapping, $conn){
+	function buttonLikeDislike($snapping_id, $user_id, $conn){
 		try {
 			$stmt = $conn->prepare("SELECT * FROM liked_snapping WHERE 
 				fk_user_id = :user_id AND fk_snapping_id = :snapping_id");
@@ -31,19 +31,19 @@
 	    $liked = count($query);
 	    if ($liked == 0) {
 	    	echo '<button id="likeBtn'.$snapping_id.'" class="likeBtn" 
-	    		onclick="likeDislike(1, '.$_SESSION["user"].', '.$snapping[0]["snapping_id"].')">Like</button>';
+	    		onclick="likeDislike(1, '.$_SESSION["user"].', '.$snapping_id.')">Like</button>';
 			echo '<button id="dislikeBtn'.$snapping_id.'" class="dislikeBtn" 
-				onclick="likeDislike(0, '.$_SESSION["user"].', '.$snapping[0]["snapping_id"].')">Dislike</button>';
+				onclick="likeDislike(0, '.$_SESSION["user"].', '.$snapping_id.')">Dislike</button>';
 			echo '<style scoped>';
-			echo '#dislikeBtn'.$snapping[0]["snapping_id"].' {display: none;}';
+			echo '#dislikeBtn'.$snapping_id.' {display: none;}';
 			echo '</style>';
 	    } else {
 	    	echo '<button id="likeBtn'.$snapping_id.'" class="likeBtn" 
-	    		onclick="likeDislike(1, '.$_SESSION["user"].', '.$snapping[0]["snapping_id"].')">Like</button>';
+	    		onclick="likeDislike(1, '.$_SESSION["user"].', '.$snapping_id.')">Like</button>';
 			echo '<button id="dislikeBtn'.$snapping_id.'" class="dislikeBtn" 
-				onclick="likeDislike(0, '.$_SESSION["user"].', '.$snapping[0]["snapping_id"].')">Dislike</button>';
+				onclick="likeDislike(0, '.$_SESSION["user"].', '.$snapping_id.')">Dislike</button>';
 			echo '<style scoped>';
-			echo '#likeBtn'.$snapping[0]["snapping_id"].' {display: none;}';
+			echo '#likeBtn'.$snapping_id.' {display: none;}';
 			echo '</style>';
 	    }
 	}
@@ -62,7 +62,7 @@
 		$likes = $stmt->fetchAll();
 			
 		$likes = count($likes);
-
+		
 		echo '<img src="snappings/'.$snapping[0]["location"].'"/>';
 		echo '<div>'.$snapping[0]["date"].'</div>';
 		echo '<div>'.$snapping[0]["real_world_location"].'</div>';
@@ -73,7 +73,7 @@
 			echo '<button onclick="deleteSnapping('.$snapping_id.')">Delete</button>';
 		}
 		echo '<div>'.$snapping[0]["description"].'</div>';
-		buttonLikeDislike($snapping_id, $user_id, $snapping, $conn);
+		buttonLikeDislike($snapping_id, $user_id, $conn);
 		echo '<div id="likes">'.$likes.'</div>';
 	?>
 </body>

@@ -4,7 +4,7 @@
 
         require_once("../services/dbConn.php");
 
-        function buttonLikeDislike($snapping_id, $user_id, $snapping, $conn){
+        function buttonLikeDislike($snapping_id, $user_id, $conn){
             try {
             $stmt = $conn->prepare("SELECT * FROM liked_snapping WHERE 
                 fk_user_id = :user_id AND fk_snapping_id = :snapping_id");
@@ -21,19 +21,19 @@
 
             if ($liked == 0) {
                 echo '<button id="likeBtn'.$snapping_id.'" class="likeBtn" 
-                onclick="likeDislike(1, '.$_SESSION["user"].', '.$snapping["snapping_id"].')">Like</button>';
+                onclick="likeDislike(1, '.$_SESSION["user"].', '.$snapping_id.')">Like</button>';
                 echo '<button id="dislikeBtn'.$snapping_id.'" class="dislikeBtn" 
-                onclick="likeDislike(0, '.$_SESSION["user"].', '.$snapping["snapping_id"].')">Dislike</button>';
+                onclick="likeDislike(0, '.$_SESSION["user"].', '.$snapping_id.')">Dislike</button>';
                 echo '<style scoped>';
-                echo '#dislikeBtn'.$snapping["snapping_id"].' {display: none;}';
+                echo '#dislikeBtn'.$snapping_id.' {display: none;}';
                 echo '</style>';
             } else {
                 echo '<button id="likeBtn'.$snapping_id.'" class="likeBtn" 
-                onclick="likeDislike(1, '.$_SESSION["user"].', '.$snapping["snapping_id"].')">Like</button>';
+                onclick="likeDislike(1, '.$_SESSION["user"].', '.$snapping_id.')">Like</button>';
                 echo '<button id="dislikeBtn'.$snapping_id.'" class="dislikeBtn" 
-                onclick="likeDislike(0, '.$_SESSION["user"].', '.$snapping["snapping_id"].')">Dislike</button>';
+                onclick="likeDislike(0, '.$_SESSION["user"].', '.$snapping_id.')">Dislike</button>';
                 echo '<style scoped>';
-                echo '#likeBtn'.$snapping["snapping_id"].' {display: none;}';
+                echo '#likeBtn'.$snapping_id.' {display: none;}';
                 echo '</style>';
             }
         }
@@ -89,7 +89,7 @@
                 echo '<a href="snapping.php?snapping='.$snapping["snapping_id"].'"><img src="snappings/'.$snapping["location"].'"/></a>';
                 echo '<div>Created on '.$snapping["date"].'</div>';
                 echo '<p>'.$snapping["description"].'</p>';
-                buttonLikeDislike($snapping["snapping_id"], $_SESSION["user"], $snapping, $conn);
+                buttonLikeDislike($snapping["snapping_id"], $_SESSION["user"], $conn);
                 echo '<div id="'."snapping".$snapping["snapping_id"].'">'.$likes.'</div>';
                 echo '</div>';
                 echo '</div>';
