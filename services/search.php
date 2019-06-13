@@ -35,12 +35,10 @@
 						<td>'.$result["info"].'</td></tr>';
 			}
 		} else {
-			echo '<div>No users found!</div>';
-			echo '<a href="../snaplife.php">Back to index</a>';
+			header("Location: ../snaplife.php?emptySearch=true");
 		}
 	} else {
-		echo '<div>No users found!</div>';
-		echo '<a href="../snaplife.php">Back to index</a>';
+		header("Location: ../snaplife.php?emptySearch=true");
 	}
 ?>
 	</table>

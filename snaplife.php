@@ -50,6 +50,13 @@
 			  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 			  crossorigin="anonymous"></script>
 	<script src="scripts/snaplife.js"></script>
+	<?php	
+		if (isset($_GET["emptySearch"])) {
+			echo '<script>';
+			echo 'alert("No users found!")';
+			echo '</script>';
+		}
+	?>
 </head>
 <body>
 	<a href="addSnapping.php">Add Snapping</a>
@@ -64,7 +71,7 @@
 	<div id="postList">
 <?php
 	try{
-		$stmt = $conn->prepare("SELECT * FROM snapping ORDER BY snapping_id DESC LIMIT 2");
+		$stmt = $conn->prepare("SELECT * FROM snapping ORDER BY snapping_id DESC LIMIT 5");
 		$stmt->execute();
 
 		$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
