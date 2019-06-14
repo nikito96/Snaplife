@@ -14,7 +14,14 @@
 			$stmt->execute();
 
 			$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-			$searchResult = $stmt->fetchAll();
+			$searchResultAccounts = $stmt->fetchAll();
+
+			$stmt = $conn->prepare("SELECT snapping.location, snapping.tags, account.username 
+				FROM snapping
+					INNER JOIN account ON snapping.fk_user_id = account.user_id
+						WHERE snapping.tags LIKE '%$search_q%'");
+			$stmt->execute();
+			$searchResultSnappings = $stmt->fetchAll();
 		} catch (PDOException $e) {
 			echo "Connection failed: " . $e->getMessage();
 		}
@@ -25,22 +32,42 @@
 	<title>Search</title>
 </head>
 <body>
-	<table>
+	<div>
+		<table>
 <?php
-		$count = count($searchResult);
-		if ($count > 0) {
-			foreach ($searchResult as $result) {
-				echo '<tr><td><img src="../profile_pics/'.$result["profile_pic"].'" /></td>
-					<td><a href="../profile.php?user='.$result["username"].'">'.$result["username"].'</a></td>
-						<td>'.$result["info"].'</td></tr>';
-			}
-		} else {
-			header("Location: ../snaplife.php?emptySearch=true");
+	$countAccounts = count($searchResultAccounts);
+	if ($countAccounts > 0) {
+		foreach ($searchResultAccounts as $result) {
+			echo '<tr><td><img src="../profile_pics/'.$result["profile_pic"].'" /></td>
+				<td><a href="../profile.php?user='.$result["username"].'">'.$result["username"].'</a></td>
+				<td>'.$result["info"].'</td></tr>';
 		}
+	} else {
+		echo '<div>No results!</div>';
+	}
+?>
+			</table>
+		</div>
+		<div>
+			<table>
+<?php
+	$countSnappings = count($searchResultSnappings);
+	if ($countSnappings > 0) {
+		foreach ($searchResultSnappings as $result) {
+			echo '<tr><td><img src="../snappings/'.$result["location"].'"/></td>
+			<td>'.$result["tags"].'</td>
+			<td>'.$result["username"].'</td></tr>';
+		}
+	} else {
+		echo '<div>No results!</div>';
+	}
+?>
+			</table>
+		</div>
+<?php
 	} else {
 		header("Location: ../snaplife.php?emptySearch=true");
 	}
 ?>
-	</table>
 </body>
 </html>
