@@ -232,10 +232,12 @@
 		$snapping_id = $_POST["snapping_id"];
 		$description = $_POST["description"];
 		$real_world_location = $_POST["real_world_location"];
+		$tags = $_POST["tags"];
 
 		$errors = array(
 			"description" => array(),
-			"real_world_location" => array()
+			"real_world_location" => array(),
+			"tags" => array()
 		);
 
 		if (strlen($description) > 255) {
@@ -244,6 +246,10 @@
 
 		if (strlen($real_world_location) > 100) {
 			$errors["real_world_location"][] = "Location can not be longer than 100 characters!";
+		}
+
+		if (strlen($tags) > 100) {
+			$errors["tags"][] = "Tags can not be more than 100 characters!";
 		}
 
 		$count = 0;
@@ -257,11 +263,12 @@
 		if ($count <= 0){
 			try {
 				$stmt = $conn->prepare("UPDATE snapping
-					SET description=:description, real_world_location=:real_world_location
+					SET description=:description, real_world_location=:real_world_location, tags=:tags
 					WHERE snapping_id=:snapping_id");
 				$stmt->bindParam(":description", $description);
 				$stmt->bindParam(":real_world_location", $real_world_location);
 				$stmt->bindParam(":snapping_id", $snapping_id);
+				$stmt->bindParam(":tags", $tags);
 				$stmt->execute();
 			} catch (PDOException $e) {
 				echo "Error: " . $e->getMessage();

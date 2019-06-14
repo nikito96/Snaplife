@@ -44,6 +44,15 @@
 				}
 			}
 		?>
+		<label for="tags">Tags:</label>
+		<textarea id="tags" name="tags"><?php echo $snapping[0]["tags"]; ?></textarea>
+		<?php
+			if (array_key_exists("tags", $errors)) {
+				foreach ($errors["tags"] as $error) {
+					echo '<div>'.$error.'</div>';
+				}
+			}
+		?>
 		<input type="submit" name="editSnapping" value="Edit">
 	</form>
 </body>

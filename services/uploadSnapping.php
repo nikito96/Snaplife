@@ -68,12 +68,13 @@
 		if (move_uploaded_file($_FILES["snapping"]["tmp_name"], $target_snapping)) {
 			$snapping = basename($_FILES["snapping"]["name"]);
 	        try {
-	        	$stmt = $conn->prepare("INSERT INTO Snapping (fk_user_id, location, description, real_world_location)
-	        		VALUES(:fk_user_id, :location, :description, :real_world_location)");
+	        	$stmt = $conn->prepare("INSERT INTO Snapping (fk_user_id, location, description, real_world_location, tags)
+	        		VALUES(:fk_user_id, :location, :description, :real_world_location, :tags)");
 	        	$stmt->bindParam(":fk_user_id", $user_id);
 	        	$stmt->bindParam(":location", $snapping);
 	        	$stmt->bindParam(":description", $description);
 	        	$stmt->bindParam(":real_world_location", $real_world_location);
+	        	$stmt->bindParam(":tags", $tags);
 	        	$stmt->execute();
 	        	header("Location: ../snaplife.php");
 	        } catch (PDOException $e) {
