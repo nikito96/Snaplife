@@ -6,7 +6,11 @@
 	$user_id = $_SESSION["user"];
 
 	try {
-		$stmt = $conn->prepare("SELECT * FROM snapping WHERE snapping_id = :snapping_id");
+		//$stmt = $conn->prepare("SELECT * FROM snapping WHERE snapping_id = :snapping_id");
+		$stmt = $conn->prepare("SELECT snapping.*, account.username, account.profile_pic
+			FROM snapping
+				INNER JOIN account ON snapping.fk_user_id = account.user_id
+					WHERE snapping_id = :snapping_id");
 		$stmt->bindParam(":snapping_id", $snapping_id);
 		$stmt->execute();
 		$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -62,7 +66,9 @@
 		$likes = $stmt->fetchAll();
 			
 		$likes = count($likes);
-		
+		echo '<a href="profile.php?user='.$snapping[0]["username"].'">
+		<img src="profile_pics/'.$snapping[0]["profile_pic"].'" />
+		'.$snapping[0]["username"].'</a><br>';
 		echo '<img src="snappings/'.$snapping[0]["location"].'"/>';
 		echo '<div>'.$snapping[0]["date"].'</div>';
 		echo '<div>'.$snapping[0]["real_world_location"].'</div>';

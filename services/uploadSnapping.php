@@ -10,11 +10,13 @@
 	$imageFileType = strtolower(pathinfo($target_snapping,PATHINFO_EXTENSION));
 	$description = $_POST["description"];
 	$real_world_location = $_POST["real_world_location"];
+	$tags = $_POST["tags"];
 
 	$errors = array(
 		"snapping" => array(),
 		"description" => array(),
-		"location" => array()
+		"location" => array(),
+		"tags" => array()
 	);
 
 	if (0 == strcmp($_FILES["snapping"]["name"], "")) {
@@ -45,6 +47,10 @@
 	}
 	if (strlen($real_world_location) > 100) {
 		$errors["location"][] = "Location can not be more than 100 characters!";
+	}
+
+	if (strlen($tags) > 100) {
+		$errors["tags"][] = "Tags can not be more than 100 characters!";
 	}
 
 	$count = 0;

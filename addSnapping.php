@@ -41,6 +41,15 @@
 			}
 		}
 	?>
+	<label for="tags">Tags (Separate with spaces):</label>
+	<textarea id="tags" name="tags"></textarea>
+	<?php
+		if (array_key_exists("tags", $errors)) {
+			foreach ($errors["tags"] as $error) {
+				echo '<div>'.$error.'</div>';
+			}
+		}
+	?>
 	<input type="submit" value="Upload snapping" name="upload">
 </form>
 <?php
