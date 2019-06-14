@@ -68,6 +68,7 @@
 		<input type="submit" name="search" value="Search">
 	</form>
 	<br>
+	<br>
 	<div id="postList">
 <?php
 	try{
@@ -102,6 +103,9 @@
 				<img src="snappings/'.$snapping["location"].'"/></a>';
 				echo '<div>Created on '.$snapping["date"].'</div>';
 				echo '<p>'.$snapping["description"].'</p>';
+				if (strlen($snapping["tags"]) > 0) {
+					echo '<div>tags: '.$snapping["tags"].'</div>';
+				}
 				buttonLikeDislike($snapping["snapping_id"], $_SESSION["user"], $conn);
 				echo '<div id="'."snapping".$snapping["snapping_id"].'">'.$likes.'</div>';
 				echo '</div>';

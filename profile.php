@@ -83,7 +83,7 @@
 	require_once("services/dbConn.php");
 
 	try{
-		$stmt = $conn->prepare("SELECT * FROM snapping WHERE fk_user_id = :user_id ORDER BY snapping_id DESC LIMIT 2");
+		$stmt = $conn->prepare("SELECT * FROM snapping WHERE fk_user_id = :user_id ORDER BY snapping_id DESC LIMIT 5");
 		$stmt->bindParam(":user_id", $user[0]["user_id"]);
 		$stmt->execute();
 
@@ -112,7 +112,10 @@
 				echo '<a href="snapping.php?snapping='.$snapping["snapping_id"].'">
 				<img src="snappings/'.$snapping["location"].'"/></a>';
 				echo '<div>Created on '.$snapping["date"].'</div>';
-				//echo '<div>'.$snapping["description"].'</div>';
+				echo '<div>'.$snapping["description"].'</div>';
+				if (strlen($snapping["tags"]) > 0) {
+					echo '<div>tags: '.$snapping["tags"].'</div>';
+				}
 				buttonLikeDislike($snapping["snapping_id"], $_SESSION["user"], $conn);
 				echo '<div id="'."snapping".$snapping["snapping_id"].'">'.$likes.'</div>';
 				echo '</div>';

@@ -48,7 +48,7 @@
             $query = $stmt->fetchAll();
             $num_rows = $query[0]["num_rows"];
 
-            $stmt = $conn->prepare("SELECT * FROM snapping WHERE snapping_id < :lastID ORDER BY snapping_id DESC LIMIT 2");
+            $stmt = $conn->prepare("SELECT * FROM snapping WHERE snapping_id < :lastID ORDER BY snapping_id DESC LIMIT 5");
             $stmt->bindParam(":lastID", $lastID);
             $stmt->execute();
             $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -57,7 +57,7 @@
             echo "Connection failed: " . $e->getMessage();
         }
 
-        echo "<br><br><br><br>";
+        echo "<br><br><br><br><br><br><br>";
 
         if($stmt->rowCount() > 0){
             foreach($snappings as $snapping){ 
@@ -84,6 +84,9 @@
                 echo '<a href="snapping.php?snapping='.$snapping["snapping_id"].'"><img src="snappings/'.$snapping["location"].'"/></a>';
                 echo '<div>Created on '.$snapping["date"].'</div>';
                 echo '<p>'.$snapping["description"].'</p>';
+                if (strlen($snapping["tags"]) > 0) {
+                    echo '<div>tags: '.$snapping["tags"].'</div>';
+                }
                 buttonLikeDislike($snapping["snapping_id"], $_SESSION["user"], $conn);
                 echo '<div id="'."snapping".$snapping["snapping_id"].'">'.$likes.'</div>';
                 echo '</div>';
