@@ -53,7 +53,7 @@
 	<?php	
 		if (isset($_GET["emptySearch"])) {
 			echo '<script>';
-			echo 'alert("No users found!")';
+			echo 'alert("No results found!")';
 			echo '</script>';
 		}
 	?>
@@ -63,8 +63,8 @@
 	<a href="profile.php?user=<?php echo $_SESSION['username'] ?>"><?php echo $_SESSION["username"]; ?></a>
 	<a href="services/logout.php">Log out</a>
 	<form action="services/search.php" method="POST">
-		<label for="username"></label>
-		<input type="text" name="username" id="username">
+		<label for="search_q"></label>
+		<input type="text" name="search_q" id="search_q">
 		<input type="submit" name="search" value="Search">
 	</form>
 	<br>

@@ -6,11 +6,11 @@
 		header("Location: ../index.php");
 	}
 
-	$username = $_POST["username"];
+	$search_q = $_POST["search_q"];
 
-	if (0 != strcmp($username, "")) {
+	if (0 != strcmp($search_q, "")) {
 		try {
-			$stmt = $conn->prepare("SELECT username, profile_pic, info FROM account WHERE username LIKE '%$username%'");
+			$stmt = $conn->prepare("SELECT username, profile_pic, info FROM account WHERE username LIKE '%$search_q%'");
 			$stmt->execute();
 
 			$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
