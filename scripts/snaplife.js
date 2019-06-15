@@ -20,9 +20,9 @@ $(document).ready(function(){
 });
 
 function likeDislike(action, user_id, snapping_id){
-    var xhttp;
     var data = [action, user_id, snapping_id];
     data = JSON.stringify(data);
+    var xhttp;
     xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {

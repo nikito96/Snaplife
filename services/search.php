@@ -16,7 +16,7 @@
 			$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
 			$searchResultAccounts = $stmt->fetchAll();
 
-			$stmt = $conn->prepare("SELECT snapping.location, snapping.tags, account.username 
+			$stmt = $conn->prepare("SELECT snapping.snapping_id, snapping.location, snapping.tags, account.username 
 				FROM snapping
 					INNER JOIN account ON snapping.fk_user_id = account.user_id
 						WHERE snapping.tags LIKE '%$search_q%'");
@@ -54,7 +54,8 @@
 	$countSnappings = count($searchResultSnappings);
 	if ($countSnappings > 0) {
 		foreach ($searchResultSnappings as $result) {
-			echo '<tr><td><img src="../snappings/'.$result["location"].'"/></td>
+			echo '<tr><td><a href="../snapping.php?snapping='.$result["snapping_id"].'">
+			<img src="../snappings/'.$result["location"].'"/></a></td>
 			<td>'.$result["tags"].'</td>
 			<td>'.$result["username"].'</td></tr>';
 		}
