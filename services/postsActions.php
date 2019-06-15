@@ -21,20 +21,20 @@
 	    $likes = count($likes);
 
 
-	    if ($liked > 0) {
+	    /*if ($liked > 0) {
 	    	$liked = 1;
 	    } else {
 	    	$liked = 0;
-	    }
+	    }*/
 
-		if (1 == $data[0] && 0 == $liked) {
+		if (1 == $data[0] && $liked == 0) {
 			$stmt = $conn->prepare("INSERT INTO liked_snapping
 			VALUES(:user_id, :snapping_id)");
 			$stmt->bindParam(":user_id", $data[1]);
 			$stmt->bindParam(":snapping_id", $data[2]);
 			$stmt->execute();
 			$likes++;
-		} elseif (0 == $data[0] && 1 == $liked) {
+		} elseif (0 == $data[0] && $liked > 0) {
 			$stmt = $conn->prepare("DELETE FROM liked_snapping 
 				WHERE fk_user_id = :user_id AND fk_snapping_id = :snapping_id");
 			$stmt->bindParam(":user_id", $data[1]);
