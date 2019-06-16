@@ -46,7 +46,7 @@
 			</div>
 			<div class="row justify-content-center">
 				<div class="col-*-* m-3">
-					<a class="btn btn-primary stretched-link" role="button" href="register.php">Register</a>
+					<a class="btn btn-primary" role="button" href="register.php">Register</a>
 				</div>
 			</div>
 		</div>
