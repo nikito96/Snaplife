@@ -9,18 +9,46 @@
 <html>
 	<head>
 		<title>Snaplife</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	</head>
 	<body>
-		<form action="services/login.php" method="post">
-			<label for="email">Email:</label><input type="text" name="email" id="email"><br>
-			<label for="password">Password:</label><input type="password" name="password" id="password"><br>
-			<?php
-				if (isset($_GET["badLogin"])) {
-					echo '<div>Wrong email or password!</div>';
-				}
-			?>
-			<input type="submit" name="login" value="Login">
-		</form>
-		<a href="register.php">Register</a>
+		<div class="container">
+  			<div class="row justify-content-center">
+  				<div class="col-*-* m-5">
+  					<h1 class="text-primary" class="display-2">Snaplife</h1>
+  				</div>
+  			</div>
+			<div class="row justify-content-center text-center">
+				<div class="border border-primary rounded" class="col-*-*">
+					<form action="services/login.php" method="post">
+						<div class="form-group m-5">
+							<label for="email">Email:</label>
+							<input type="text" class="form-control" name="email" id="email" placeholder="Enter email">
+						</div>
+						<div class="form-group m-5">
+							<label for="password">Password:</label>
+							<input type="password" class="form-control" name="password" id="password" 
+							placeholder="Enter password">
+						</div>
+						<?php
+							if (isset($_GET["badLogin"])) {
+								echo '<div class="text-primary mb-2">Wrong email or password!</div>';
+							}
+						?>
+						<input class="btn btn-primary mb-3" type="submit" name="login" value="Login">
+					</form>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-*-* m-3">
+					<a class="btn btn-primary stretched-link" role="button" href="register.php">Register</a>
+				</div>
+			</div>
+		</div>
 	</body>
 </html>

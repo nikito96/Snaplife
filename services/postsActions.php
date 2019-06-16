@@ -40,9 +40,9 @@
 			$stmt->bindParam(":user_id", $data[1]);
 			$stmt->bindParam(":snapping_id", $data[2]);
 			$stmt->execute();
-			if ($likes != 0) {
-				$likes--;
-			}
+			//if ($likes != 0) {
+			$likes--;
+			//}
 		}
 
 		echo $likes;
