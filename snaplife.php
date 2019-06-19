@@ -50,6 +50,9 @@
 			  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 			  crossorigin="anonymous"></script>
 	<script src="scripts/snaplife.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
 	<?php	
 		if (isset($_GET["emptySearch"])) {
 			echo '<script>';
@@ -58,10 +61,28 @@
 		}
 	?>
 </head>
-<body>
-	<a href="addSnapping.php">Add Snapping</a>
-	<a href="profile.php?user=<?php echo $_SESSION['username'] ?>"><?php echo $_SESSION["username"]; ?></a>
-	<a href="services/logout.php">Log out</a>
+	<body>
+	<nav class="navbar navbar-expand-sm bg-primary navbar-dark fixed-top">
+		<a class="navbar-brand font-weight-bold" href="snaplife.php">Snaplife</a>
+		<ul class="navbar-nav">
+			<!--<li class="nav-item active">
+				<a class="nav-link" href="#">Active</a>
+			</li>-->
+			<li class="nav-item">
+				<a class="nav-link" href="profile.php?user=<?php echo $_SESSION['username'] ?>">
+					<?php echo $_SESSION["username"]; ?></a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="addSnapping.php">Add Snapping</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="services/logout.php">Log out</a>
+			</li>
+			<!--<li class="nav-item">
+				<a class="nav-link disabled" href="#">Disabled</a>
+			</li>-->
+		</ul>
+	</nav>
 	<form action="services/search.php" method="POST">
 		<label for="search_q"></label>
 		<input type="text" name="search_q" id="search_q">

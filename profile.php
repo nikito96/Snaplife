@@ -52,13 +52,35 @@
 <html>
 <head>
 	<title><?php echo $user[0]["username"]; ?></title>
+	<meta charset="UTF-8"> 
 	<script
 			  src="https://code.jquery.com/jquery-3.4.1.js"
 			  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 			  crossorigin="anonymous"></script>
 	<script src="scripts/profile.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
 </head>
 <body>
+	<nav class="navbar navbar-expand-sm bg-primary navbar-dark fixed-top">
+		<a class="navbar-brand font-weight-bold" href="snaplife.php">Snaplife</a>
+		<ul class="navbar-nav">
+			<li class="nav-item active">
+				<a class="nav-link" href="profile.php?user=<?php echo $_SESSION['username'] ?>">
+					<?php echo $_SESSION["username"]; ?></a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="addSnapping.php">Add Snapping</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="services/logout.php">Log out</a>
+			</li>
+			<!--<li class="nav-item">
+				<a class="nav-link disabled" href="#">Disabled</a>
+			</li>-->
+		</ul>
+	</nav>
 	<h1><?php echo $user[0]["username"]; ?></h1>
 	<img src="profile_pics/<?php echo $user[0]["profile_pic"] ?>"/>
 	<p><?php echo $user[0]["info"]; ?></p>

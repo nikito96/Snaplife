@@ -20,11 +20,11 @@
 		<div class="container">
   			<div class="row justify-content-center">
   				<div class="col-*-* m-5">
-  					<h1 class="text-primary" class="display-2">Snaplife</h1>
+					<a href="index.php"><img src="img\snaplife_logo.jpg" /></a>
   				</div>
   			</div>
 			<div class="row justify-content-center text-center">
-				<div class="border border-primary rounded" class="col-*-*">
+				<div class="col-*-* border border-primary rounded p-2">
 					<form action="services/login.php" method="post">
 						<div class="form-group m-5">
 							<label for="email">Email:</label>
