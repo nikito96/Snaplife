@@ -61,6 +61,7 @@
 	<script src="scripts/snapping.js"></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="styles/snapping.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -95,8 +96,21 @@
 			</li>-->
 		</ul>
 	</nav>
-	<?php } ?>
+	<?php
+		} else {
+	?>
 	<div class="container-fluid">
+
+	<?php
+			echo '<div class="row justify-content-center">';
+  			echo '<div class="col-*-* m-3">';
+			echo '<a href="index.php"><img src="img\snaplife_logo.jpg" /></a>';
+  			echo '</div>';
+  			echo '</div>';
+		}
+	?>
+		<div class="row justify-content-center">
+  			<div class="col-*-*">
 	<?php
 		$stmt = $conn->prepare("SELECT * FROM liked_snapping WHERE fk_snapping_id = :snapping_id");
 		$stmt->bindParam(":snapping_id", $snapping[0]["snapping_id"]);
@@ -113,7 +127,7 @@
 		echo '</div>';
 		echo '<div class="row">';
 		echo '<div class="col-*-*">';
-		echo '<img src="snappings/'.$snapping[0]["location"].'"/>';
+		echo '<img class="snapping" src="snappings/'.$snapping[0]["location"].'"/>';
 		echo '</div>';
 		echo '</div>';
 		echo '<div class="row">';
@@ -159,6 +173,8 @@
 		}
 		echo '</div>';
 	?>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
