@@ -63,7 +63,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
 </head>
 <body>
-	<nav class="navbar navbar-expand-sm bg-primary navbar-dark fixed-top">
+	<nav class="navbar navbar-expand-sm bg-primary navbar-dark sticky-top">
 		<a class="navbar-brand font-weight-bold" href="snaplife.php">Snaplife</a>
 		<ul class="navbar-nav">
 			<li class="nav-item active">
