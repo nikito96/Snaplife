@@ -96,11 +96,10 @@
 			</li>-->
 		</ul>
 	</nav>
+	<div class="container-fluid">
 	<?php
 		} else {
 	?>
-	<div class="container-fluid">
-
 	<?php
 			echo '<div class="row justify-content-center">';
   			echo '<div class="col-*-* m-3">';
