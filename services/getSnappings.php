@@ -20,17 +20,17 @@
             $liked = count($query);
 
             if ($liked == 0) {
-                echo '<button id="likeBtn'.$snapping_id.'" class="likeBtn" 
+                echo '<button id="likeBtn'.$snapping_id.'" class="btn btn-primary" 
                 onclick="likeDislike(1, '.$_SESSION["user"].', '.$snapping_id.')">Like</button>';
-                echo '<button id="dislikeBtn'.$snapping_id.'" class="dislikeBtn" 
+                echo '<button id="dislikeBtn'.$snapping_id.'" class="btn btn-primary" 
                 onclick="likeDislike(0, '.$_SESSION["user"].', '.$snapping_id.')">Dislike</button>';
                 echo '<style scoped>';
                 echo '#dislikeBtn'.$snapping_id.' {display: none;}';
                 echo '</style>';
             } else {
-                echo '<button id="likeBtn'.$snapping_id.'" class="likeBtn" 
+                echo '<button id="likeBtn'.$snapping_id.'" class="btn btn-primary" 
                 onclick="likeDislike(1, '.$_SESSION["user"].', '.$snapping_id.')">Like</button>';
-                echo '<button id="dislikeBtn'.$snapping_id.'" class="dislikeBtn" 
+                echo '<button id="dislikeBtn'.$snapping_id.'" class="btn btn-primary" 
                 onclick="likeDislike(0, '.$_SESSION["user"].', '.$snapping_id.')">Dislike</button>';
                 echo '<style scoped>';
                 echo '#likeBtn'.$snapping_id.' {display: none;}';
@@ -78,7 +78,7 @@
                 echo '<div class="row justify-content-center">';
                 echo '<div class="col-*-*">';
                 echo '<div class="row"><div class="col-*-*"><a href="profile.php?user='.$user[0]["username"].'">
-                <img src="profile_pics/'.$user[0]["profile_pic"].'"/></div>
+                <img class="profile_pic" src="profile_pics/'.$user[0]["profile_pic"].'"/></div>
                 <div class="col-*-*">'.$user[0]["username"].'</a></div></div>';
                 if(strlen($snapping["real_world_location"]) > 0){
                     echo '<div class="row"><div class="col-*-* text-primary">

@@ -37,7 +37,7 @@
 						<?php
 							if(array_key_exists("username", $errors)) {
 								foreach ($errors["username"] as $value) {
-									echo $value . "\r\n";
+									echo '<div class="text-primary">'.$value.'</div>';
 								}
 							}
 						?>
@@ -48,7 +48,7 @@
 						<?php
 							if(array_key_exists("email", $errors)) {
 								foreach ($errors["email"] as $value) {
-									echo $value . "\r\n";
+									echo '<div class="text-primary">'.$value.'</div>';
 								}
 							}
 						?>
@@ -59,7 +59,7 @@
 						<?php
 							if(array_key_exists("password", $errors)) {
 								foreach ($errors["password"] as $value) {
-									echo $value . "\r\n";
+									echo '<div class="text-primary">'.$value.'</div>';
 								}
 							}
 						?>
@@ -70,7 +70,7 @@
 						<?php
 							if(array_key_exists("confirm_password", $errors)) {
 								foreach ($errors["confirm_password"] as $value) {
-									echo $value . "\r\n";
+									echo '<div class="text-primary">'.$value.'</div>';
 								}
 							}
 						?>
