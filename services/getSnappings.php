@@ -48,7 +48,7 @@
             $query = $stmt->fetchAll();
             $num_rows = $query[0]["num_rows"];
 
-            $stmt = $conn->prepare("SELECT * FROM snapping WHERE snapping_id < :lastID ORDER BY snapping_id DESC LIMIT 5");
+            $stmt = $conn->prepare("SELECT * FROM snapping WHERE snapping_id < :lastID ORDER BY snapping_id DESC LIMIT 6");
             $stmt->bindParam(":lastID", $lastID);
             $stmt->execute();
             $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -56,8 +56,6 @@
         }catch(PDOException $e){
             echo "Connection failed: " . $e->getMessage();
         }
-
-        echo "<br><br><br><br><br><br><br>";
 
         if($stmt->rowCount() > 0){
             foreach($snappings as $snapping){ 

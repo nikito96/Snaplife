@@ -50,14 +50,14 @@
 			  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 			  crossorigin="anonymous"></script>
 	<script src="scripts/snaplife.js"></script>
-	<link rel="stylesheet" type="text/css" href="styles/snaplife.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
+	<link rel="stylesheet" type="text/css" href="styles/snaplife.css">
 	<?php	
 		if (isset($_GET["emptySearch"])) {
 			echo '<script>';
-			echo 'alert("No results found!")';
+			echo 'alert("Please fill in the search field before searching!")';
 			echo '</script>';
 		}
 	?>
@@ -92,7 +92,7 @@
 		<div id="postList">
 <?php
 	try{
-		$stmt = $conn->prepare("SELECT * FROM snapping ORDER BY snapping_id DESC LIMIT 5");
+		$stmt = $conn->prepare("SELECT * FROM snapping ORDER BY snapping_id DESC LIMIT 6");
 		$stmt->execute();
 
 		$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -117,7 +117,7 @@
 				echo '<div class="col-*-*">';
 				echo '<div class="row"><div class="col-*-*"><a href="profile.php?user='.$user[0]["username"].'">
 				<img class="profile_pic" src="profile_pics/'.$user[0]["profile_pic"].'"/></div>
-				<div class="col-*-*">'.$user[0]["username"].'</a></div></div>';
+				<div class="col-*-*">'.$user[0]["username"].'</div></a></div>';
 				if(strlen($snapping["real_world_location"]) > 0){
                     echo '<div class="row"><div class="col-*-* text-primary">
                     Location: '.$snapping["real_world_location"].'</div></div>';

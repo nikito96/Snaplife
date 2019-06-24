@@ -97,7 +97,7 @@
 			echo '<tr><td><a href="../snapping.php?snapping='.$result["snapping_id"].'">
 			<img class="snapping" src="../snappings/'.$result["location"].'"/></a></td>
 			<td>'.$result["tags"].'</td>
-			<td>'.$result["username"].'</td></tr>';
+			<td><a href="../profile.php?user='.$result["username"].'">'.$result["username"].'</a></td></tr>';
 		}
 	} else {
 		echo '<tr><td>No results!</td></tr>';
