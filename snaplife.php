@@ -88,7 +88,7 @@
 			</li>-->
 		</ul>
 	</nav>
-	<div class="container">
+	<div class="container text-primary">
 		<div id="postList">
 <?php
 	try{
@@ -119,7 +119,7 @@
 				<img class="profile_pic" src="profile_pics/'.$user[0]["profile_pic"].'"/></div>
 				<div class="col-*-*">'.$user[0]["username"].'</div></a></div>';
 				if(strlen($snapping["real_world_location"]) > 0){
-                    echo '<div class="row"><div class="col-*-* text-primary">
+                    echo '<div class="row"><div class="col-*-*">
                     Location: '.$snapping["real_world_location"].'</div></div>';
                 }
                 echo '<div class="row"><div class="col-*-*">';
@@ -127,7 +127,7 @@
 				<img class="img-fluid snapping" src="snappings/'.$snapping["location"].'"/></a>';
 				echo '</div></div>';
 				echo '<div class="row"><div class="col-*-*">';
-				echo '<div>Created on '.$snapping["date"].'</div>';
+				echo '<div>Uploaded on '.$snapping["date"].'</div>';
 				echo '</div></div>';
 				echo '<div class="row"><div class="col-*-*">';
 				echo '<div>'.$snapping["description"].'</div>';

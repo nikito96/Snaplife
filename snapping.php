@@ -36,17 +36,17 @@
 
 	    $liked = count($query);
 	    if ($liked == 0) {
-	    	echo '<button id="likeBtn'.$snapping_id.'" class="likeBtn" 
+	    	echo '<button id="likeBtn'.$snapping_id.'" class="btn btn-primary m-1" 
 	    		onclick="likeDislike(1, '.$_SESSION["user"].', '.$snapping_id.')">Like</button>';
-			echo '<button id="dislikeBtn'.$snapping_id.'" class="dislikeBtn" 
+			echo '<button id="dislikeBtn'.$snapping_id.'" class="btn btn-primary m-1" 
 				onclick="likeDislike(0, '.$_SESSION["user"].', '.$snapping_id.')">Dislike</button>';
 			echo '<style scoped>';
 			echo '#dislikeBtn'.$snapping_id.' {display: none;}';
 			echo '</style>';
 	    } else {
-	    	echo '<button id="likeBtn'.$snapping_id.'" class="likeBtn" 
+	    	echo '<button id="likeBtn'.$snapping_id.'" class="btn btn-primary m-1" 
 	    		onclick="likeDislike(1, '.$_SESSION["user"].', '.$snapping_id.')">Like</button>';
-			echo '<button id="dislikeBtn'.$snapping_id.'" class="dislikeBtn" 
+			echo '<button id="dislikeBtn'.$snapping_id.'" class="btn btn-primary m-1" 
 				onclick="likeDislike(0, '.$_SESSION["user"].', '.$snapping_id.')">Dislike</button>';
 			echo '<style scoped>';
 			echo '#likeBtn'.$snapping_id.' {display: none;}';
@@ -96,7 +96,7 @@
 			</li>-->
 		</ul>
 	</nav>
-	<div class="container-fluid">
+	<div class="container-fluid text-primary">
 	<?php
 		} else {
 	?>
@@ -124,6 +124,10 @@
 		'.$snapping[0]["username"].'</a>';
 		echo '</div>';
 		echo '</div>';
+		if(strlen($snapping[0]["real_world_location"]) > 0){
+            echo '<div class="row"><div class="col-*-*">
+                Location: '.$snapping[0]["real_world_location"].'</div></div>';
+        }
 		echo '<div class="row">';
 		echo '<div class="col-*-*">';
 		echo '<img class="snapping" src="snappings/'.$snapping[0]["location"].'"/>';
@@ -131,10 +135,7 @@
 		echo '</div>';
 		echo '<div class="row">';
 		echo '<div class="col-*-*">';
-		echo '<div>'.$snapping[0]["date"].'</div>';
-		echo '</div>';
-		echo '<div class="col-*-*">';
-		echo '<div>'.$snapping[0]["real_world_location"].'</div>';
+		echo '<div>Uploaded on '.$snapping[0]["date"].'</div>';
 		echo '</div>';
 		echo '</div>';
 		echo '<div class="row">';
@@ -156,18 +157,18 @@
 		}
 		echo '</div>';
 		echo '<div class="col-*-*">';
-		echo '<div id="likes">'.$likes.'</div>';
+		echo '<div class="m-1" id="likes">'.$likes.'</div>';
 		echo '</div>';
 		echo '<div class="col-*-*">';
-		echo '<div>likes</div>';
+		echo '<div class="m-1">likes</div>';
 		echo '</div>';
 		if (isset($_SESSION["user"]) && (0 == strcmp($user_id, $snapping[0]["fk_user_id"]) || 
 			0 == strcmp($_SESSION["permission"], "ADMIN"))) {
 			echo '<div class="col-*-*">';
-			echo '<a href="editSnapping.php?snapping='.$snapping_id.'">Edit</a>';
+			echo '<a class="btn btn-primary m-1" href="editSnapping.php?snapping='.$snapping_id.'">Edit</a>';
 			echo '</div>';
 			echo '<div class="col-*-*">';
-			echo '<button onclick="deleteSnapping('.$snapping_id.')">Delete</button>';
+			echo '<button class="btn btn-primary m-1" onclick="deleteSnapping('.$snapping_id.')">Delete</button>';
 			echo '</div>';
 		}
 		echo '</div>';
