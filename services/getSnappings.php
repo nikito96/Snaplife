@@ -120,10 +120,14 @@
             echo "That's All!";
             echo "</div>";
         }
-    }else{ 
+    }else{
+    //echo '<div class="row justify-content-center">';
+    //echo '<div class="col-*-*">';
     echo '<div class="load-more" lastID="0">';
-    echo "That's All!";
-    echo "</div>";
+    echo '<div class="text-primary font-weight-bold">That is All! </div>';
+    //echo '</div>';
+    //echo '</div>';
+    echo '</div>';
     }
     $conn = NULL;
 ?>

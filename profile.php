@@ -30,17 +30,17 @@
 	    $liked = count($query);
 
 	    if ($liked == 0) {
-	    	echo '<button id="likeBtn'.$snapping_id.'" class="likeBtn" 
+	    	echo '<button id="likeBtn'.$snapping_id.'" class="btn btn-primary" 
 	    		onclick="likeDislike(1, '.$_SESSION["user"].', '.$snapping_id.')">Like</button>';
-			echo '<button id="dislikeBtn'.$snapping_id.'" class="dislikeBtn" 
+			echo '<button id="dislikeBtn'.$snapping_id.'" class="btn btn-primary" 
 				onclick="likeDislike(0, '.$_SESSION["user"].', '.$snapping_id.')">Dislike</button>';
 			echo '<style scoped>';
 			echo '#dislikeBtn'.$snapping_id.' {display: none;}';
 			echo '</style>';
 	    } else {
-	    	echo '<button id="likeBtn'.$snapping_id.'" class="likeBtn" 
+	    	echo '<button id="likeBtn'.$snapping_id.'" class="btn btn-primary" 
 	    		onclick="likeDislike(1, '.$_SESSION["user"].', '.$snapping_id.')">Like</button>';
-			echo '<button id="dislikeBtn'.$snapping_id.'" class="dislikeBtn" 
+			echo '<button id="dislikeBtn'.$snapping_id.'" class="btn btn-primary" 
 				onclick="likeDislike(0, '.$_SESSION["user"].', '.$snapping_id.')">Dislike</button>';
 			echo '<style scoped>';
 			echo '#likeBtn'.$snapping_id.' {display: none;}';
@@ -58,16 +58,24 @@
 			  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 			  crossorigin="anonymous"></script>
 	<script src="scripts/profile.js"></script>
+	<link rel="stylesheet" type="text/css" href="styles/profile.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-primary navbar-dark sticky-top">
 		<a class="navbar-brand font-weight-bold" href="snaplife.php">Snaplife</a>
+		<form class="form-inline" action="services/search.php" method="POST">
+			<input class="form-control mr-sm-2" type="text" name="search_q" placeholder="Search">
+			<input class="btn btn-primary" type="submit" name="search" value="Search">
+		</form>
 		<ul class="navbar-nav">
-			<li class="nav-item active">
-				<a class="nav-link" href="profile.php?user=<?php echo $_SESSION['username'] ?>">
+			<!--<li class="nav-item active">
+				<a class="nav-link" href="#">Active</a>
+			</li>-->
+			<li class="nav-item">
+				<a class="nav-link active" href="profile.php?user=<?php echo $_SESSION['username'] ?>">
 					<?php echo $_SESSION["username"]; ?></a>
 			</li>
 			<li class="nav-item">
@@ -81,26 +89,46 @@
 			</li>-->
 		</ul>
 	</nav>
-	<h1><?php echo $user[0]["username"]; ?></h1>
-	<img src="profile_pics/<?php echo $user[0]["profile_pic"] ?>"/>
-	<p><?php echo $user[0]["info"]; ?></p>
+	<div class="container">
+		<div class="row justify-content-center m-3">
+			<div class="col-*-*">
+				<h1><?php echo $user[0]["username"]; ?></h1>
+			</div>
+			<div class="col-*-*">
+				<img src="profile_pics/<?php echo $user[0]["profile_pic"] ?>"/>
+			</div>
+		</div>
+		<div class="row justify-content-center">
+			<div class="col-*-*">
+				<div><?php echo $user[0]["info"]; ?></div>
+			</div>
+		</div>
+		<div class="row justify-content-center">
 	<?php
 		if (0 == strcmp($_SESSION["permission"], "ADMIN")) {
+			echo '<div class="col-*-*">';
 			if (0 == strcmp($user[0]["permission"], "USER")) {
-				echo '<a href="services/admin.php?admin=true&user='.$user[0]["user_id"].'">Make admin</a>';
+				echo '<a class="btn btn-primary m-3" 
+				href="services/admin.php?admin=true&user='.$user[0]["user_id"].'">Make admin</a>';
 			} else {
-				echo '<a href="services/admin.php?admin=false&user='.$user[0]["user_id"].'">Remove admin</a>';
+				echo '<a class="btn btn-primary m-3" 
+				href="services/admin.php?admin=false&user='.$user[0]["user_id"].'">Remove admin</a>';
 			}
+			echo '</div>';
 		}
 
 		if(isset($_SESSION["user"]) && (0 == strcmp($username, $_SESSION["username"]) 
 			|| 0 == strcmp($_SESSION["permission"], "ADMIN"))){
-			echo '<a href="editProfile.php?user='.$user[0]["user_id"].'">Edit</a>';
+			echo '<div class="col-*-*">';
+			echo '<a class="btn btn-primary m-3" href="editProfile.php?user='.$user[0]["user_id"].'">Edit</a>';
+			echo '</div>';
 		}
 		echo '<br><br><br>';
 	?>
-
-	<div id="postList">
+		</div>
+		<div class="row justify-content-center">
+			<div class="col-*-*">
+				<div id="postList">
 <?php
 	require_once("services/dbConn.php");
 
@@ -127,20 +155,43 @@
 				$stmt->execute();
 				$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
 				$user = $stmt->fetchAll();
-				echo '<div class="list-item">';
+				echo '<div class="row">';
+				echo '<div class="col-*-*">';
+				echo '<div class="row"><div class="col-*-*"><a href="profile.php?user='.$user[0]["username"].'">
+				<img class="profile_pic" src="profile_pics/'.$user[0]["profile_pic"].'"/></div>
+				<div class="col-*-*">'.$user[0]["username"].'</div></a></div>';
 				if(strlen($snapping["real_world_location"]) > 0){
-                    echo "<p>Location: ".$snapping["real_world_location"]."</p>";
+                    echo '<div class="row"><div class="col-*-*">
+                    Location: '.$snapping["real_world_location"].'</div></div>';
                 }
+                echo '<div class="row"><div class="col-*-*">';
 				echo '<a href="snapping.php?snapping='.$snapping["snapping_id"].'">
-				<img src="snappings/'.$snapping["location"].'"/></a>';
-				echo '<div>Created on '.$snapping["date"].'</div>';
+				<img class="img-fluid snapping" src="snappings/'.$snapping["location"].'"/></a>';
+				echo '</div></div>';
+				echo '<div class="row"><div class="col-*-*">';
+				echo '<div>Uploaded on '.$snapping["date"].'</div>';
+				echo '</div></div>';
+				echo '<div class="row"><div class="col-*-*">';
 				echo '<div>'.$snapping["description"].'</div>';
+				echo '</div></div>';
 				if (strlen($snapping["tags"]) > 0) {
+					echo '<div class="row"><div class="col-*-*">';
 					echo '<div>tags: '.$snapping["tags"].'</div>';
+					echo '</div></div>';
 				}
+				echo '<div class="row"><div class="col-*-*">';
 				buttonLikeDislike($snapping["snapping_id"], $_SESSION["user"], $conn);
-				echo '<div id="'."snapping".$snapping["snapping_id"].'">'.$likes.'</div>';
 				echo '</div>';
+				echo '<div class="col-*-*">';
+				echo '<div class="m-1" id="'."snapping".$snapping["snapping_id"].'">'.$likes.'</div>';
+				echo '</div>';
+				echo '<div class="col-*-*">';
+				echo '<div class="m-1">likes</div>';
+				echo '</div>';
+				echo '</div>';
+				echo '</div>';
+				echo '</div>';
+
 			}
 			echo '<div class="load-more" userID="'.$snapping["fk_user_id"].'" lastID="'.$postID.'" style="display: none;">';
 			echo '<p>Loading...</p>';
@@ -150,6 +201,9 @@
    		echo "Connection failed: " . $e->getMessage();
 	}
 ?>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

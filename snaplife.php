@@ -89,7 +89,9 @@
 		</ul>
 	</nav>
 	<div class="container text-primary">
-		<div id="postList">
+		<div class="row justify-content-center">
+			<div class="col-*-*">
+				<div id="postList">
 <?php
 	try{
 		$stmt = $conn->prepare("SELECT * FROM snapping ORDER BY snapping_id DESC LIMIT 6");
@@ -113,7 +115,7 @@
 				$stmt->execute();
 				$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
 				$user = $stmt->fetchAll();
-				echo '<div class="row justify-content-center">';
+				echo '<div class="row">';
 				echo '<div class="col-*-*">';
 				echo '<div class="row"><div class="col-*-*"><a href="profile.php?user='.$user[0]["username"].'">
 				<img class="profile_pic" src="profile_pics/'.$user[0]["profile_pic"].'"/></div>
@@ -158,6 +160,8 @@
    		echo "Connection failed: " . $e->getMessage();
 	}
 ?>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>

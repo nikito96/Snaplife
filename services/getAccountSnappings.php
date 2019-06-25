@@ -42,7 +42,6 @@
 
         $lastID = $data[0];
         $user_id = $data[1];
-
         try{
             $stmt = $conn->prepare("SELECT COUNT(*) as num_rows FROM snapping WHERE snapping_id < :lastID 
                 AND fk_user_id = :user_id ORDER BY snapping_id DESC");
@@ -53,8 +52,10 @@
             $query = $stmt->fetchAll();
             $num_rows = $query[0]["num_rows"];
 
-            $stmt = $conn->prepare("SELECT * FROM snapping WHERE snapping_id < :lastID ORDER BY snapping_id DESC LIMIT 5");
+            $stmt = $conn->prepare("SELECT * FROM snapping WHERE snapping_id < :lastID AND fk_user_id = :user_id 
+                ORDER BY snapping_id DESC LIMIT 5");
             $stmt->bindParam(":lastID", $lastID);
+            $stmt->bindParam(":user_id", $user_id);
             $stmt->execute();
             $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $snappings = $stmt->fetchAll();
@@ -62,7 +63,7 @@
             echo "Connection failed: " . $e->getMessage();
         }
 
-        echo "<br><br><br><br>";
+        echo "<br><br><br>";
 
         if($stmt->rowCount() > 0){
             foreach($snappings as $snapping){ 
@@ -80,20 +81,40 @@
                 $stmt->execute();
                 $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
                 $user = $stmt->fetchAll();
-                echo '<div class="list-item">';
-                echo '<div><a href="profile.php?user='.$user[0]["username"].'"><img src="profile_pics/'.$user[0]["profile_pic"].'"/>
-                '.$user[0]["username"].'</a></div>';
+               echo '<div class="row">';
+                echo '<div class="col-*-*">';
+                echo '<div class="row"><div class="col-*-*"><a href="profile.php?user='.$user[0]["username"].'">
+                <img class="profile_pic" src="profile_pics/'.$user[0]["profile_pic"].'"/></div>
+                <div class="col-*-*">'.$user[0]["username"].'</div></a></div>';
                 if(strlen($snapping["real_world_location"]) > 0){
-                    echo "<p>Location: ".$snapping["real_world_location"]."</p>";
+                    echo '<div class="row"><div class="col-*-*">
+                    Location: '.$snapping["real_world_location"].'</div></div>';
                 }
-                echo '<a href="snapping.php?snapping='.$snapping["snapping_id"].'"><img src="snappings/'.$snapping["location"].'"/></a>';
-                echo '<div>Created on '.$snapping["date"].'</div>';
-                echo '<p>'.$snapping["description"].'</p>';
+                echo '<div class="row"><div class="col-*-*">';
+                echo '<a href="snapping.php?snapping='.$snapping["snapping_id"].'">
+                <img class="img-fluid snapping" src="snappings/'.$snapping["location"].'"/></a>';
+                echo '</div></div>';
+                echo '<div class="row"><div class="col-*-*">';
+                echo '<div>Uploaded on '.$snapping["date"].'</div>';
+                echo '</div></div>';
+                echo '<div class="row"><div class="col-*-*">';
+                echo '<div>'.$snapping["description"].'</div>';
+                echo '</div></div>';
                 if (strlen($snapping["tags"]) > 0) {
+                    echo '<div class="row"><div class="col-*-*">';
                     echo '<div>tags: '.$snapping["tags"].'</div>';
+                    echo '</div></div>';
                 }
+                echo '<div class="row"><div class="col-*-*">';
                 buttonLikeDislike($snapping["snapping_id"], $_SESSION["user"], $conn);
-                echo '<div id="'."snapping".$snapping["snapping_id"].'">'.$likes.'</div>';
+                echo '</div>';
+                echo '<div class="col-*-*">';
+                echo '<div class="m-1" id="'."snapping".$snapping["snapping_id"].'">'.$likes.'</div>';
+                echo '</div>';
+                echo '<div class="col-*-*">';
+                echo '<div class="m-1">likes</div>';
+                echo '</div>';
+                echo '</div>';
                 echo '</div>';
                 echo '</div>';
             }
