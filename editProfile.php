@@ -31,8 +31,39 @@
 <html>
 <head>
 	<title>Edit profile</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+	<nav class="navbar navbar-expand-sm bg-primary navbar-dark sticky-top">
+		<a class="navbar-brand font-weight-bold" href="snaplife.php">Snaplife</a>
+		<form class="form-inline" action="services/search.php" method="POST">
+			<input class="form-control mr-sm-2" type="text" name="search_q" placeholder="Search">
+			<input class="btn btn-primary" type="submit" name="search" value="Search">
+		</form>
+		<ul class="navbar-nav">
+			<!--<li class="nav-item active">
+				<a class="nav-link" href="#">Active</a>
+			</li>-->
+			<li class="nav-item">
+				<a class="nav-link" href="profile.php?user=<?php echo $_SESSION['username'] ?>">
+					<?php echo $_SESSION["username"]; ?></a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="addSnapping.php">Add Snapping</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="services/logout.php">Log out</a>
+			</li>
+			<!--<li class="nav-item">
+				<a class="nav-link disabled" href="#">Disabled</a>
+			</li>-->
+		</ul>
+	</nav>
 	<form action="services/edit.php" method="post" enctype="multipart/form-data">
 		<label for="info">Profile info: </label>
 		<textarea id="info" name="info"><?php echo $user[0]["info"]; ?></textarea>
@@ -54,7 +85,8 @@
 		<input type="hidden" name="user_id" value="<?php echo $user[0]["user_id"]; ?>">
 		<input type="submit" name="edit" value="Edit">
 	</form>
-	<a href="services/edit.php?profile-pic=default&user=<?php echo $user[0]["user_id"]; ?>">Set default profile picture</a>
+	<a href="services/edit.php?profile-pic=default&user=<?php echo $user[0]["user_id"]; ?>">
+	Set default profile picture</a>
 	<form action="services/edit.php" method="post">
 		<label for="username">Username:</label>
 		<input type="text" name="username" value="<?php echo $user[0]["username"]; ?>" id="username">

@@ -78,6 +78,7 @@
 							$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 							$stmt->bindParam(":password", $hashedPassword);
 							$stmt->execute();
+							$_SESSION["username"] = $username;
 							header("Location: ../editProfile.php?user=".$user_id);
 						} else {
 							$errors["confirm_password"][] = "Passwords do not match!";
@@ -94,6 +95,7 @@
 					} else {
 						$stmt->bindParam(":password", $pass_cmp[0]["password"]);
 						$stmt->execute();
+						$_SESSION["username"] = $username;
 						header("Location: ../editProfile.php?user=".$user_id);
 					}
 				}
