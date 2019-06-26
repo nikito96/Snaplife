@@ -64,77 +64,102 @@
 			</li>-->
 		</ul>
 	</nav>
-	<form action="services/edit.php" method="post" enctype="multipart/form-data">
-		<label for="info">Profile info: </label>
-		<textarea id="info" name="info"><?php echo $user[0]["info"]; ?></textarea>
-		<?php
-			if (array_key_exists("info", $errors)) {
-				foreach ($errors["info"] as $error) {
-					echo '<div>'.$error.'</div>';
-				}
-			}
-		?>
-		<label for="profile-pic"> Profile picture: </label><input type="file" id="profile-pic" name="profile-pic">
-		<?php
-			if (array_key_exists("snapping", $errors)) {
-				foreach ($errors["snapping"] as $error) {
-					echo '<div>'.$error.'</div>';
-				}
-			}
-		?>
-		<input type="hidden" name="user_id" value="<?php echo $user[0]["user_id"]; ?>">
-		<input type="submit" name="edit" value="Edit">
-	</form>
-	<a href="services/edit.php?profile-pic=default&user=<?php echo $user[0]["user_id"]; ?>">
-	Set default profile picture</a>
-	<form action="services/edit.php" method="post">
-		<label for="username">Username:</label>
-		<input type="text" name="username" value="<?php echo $user[0]["username"]; ?>" id="username">
-		<?php
-			if (array_key_exists("username", $errors)) {
-				foreach ($errors["username"] as $error) {
-					echo '<div>'.$error.'</div>';
-				}
-			}
-		?>
-		<label for="password">Password:</label>
-		<input type="password" name="password" id="password">
-		<?php
-			if (array_key_exists("password", $errors)) {
-				foreach ($errors["password"] as $error) {
-					echo '<div>'.$error.'</div>';
-				}
-			}
-		?>
-		<label for="confirm_password">Confirm password:</label>
-		<input type="password" name="confirm_password" id="confirm_password">
-		<?php
-			if (array_key_exists("confirm_password", $errors)) {
-				foreach ($errors["confirm_password"] as $error) {
-					echo '<div>'.$error.'</div>';
-				}
-			}
-		?>
-		<label for="email">Email:</label>
-		<input type="text" name="email" value="<?php echo $user[0]["email"] ?>" id="email">
-		<?php
-			if (array_key_exists("email", $errors)) {
-				foreach ($errors["email"] as $error) {
-					echo '<div>'.$error.'</div>';
-				}
-			}
-		?>
-		<label for="pass_auth">Authentication password:</label><input type="password" name="pass_auth" id="pass_auth">
-		<?php
-			if (array_key_exists("pass_auth", $errors)) {
-				foreach ($errors["pass_auth"] as $error) {
-					echo '<div>'.$error.'</div>';
-				}
-			}
-		?>
-		<input type="hidden" name="user_id" value="<?php echo $user[0]["user_id"]; ?>">
-		<input type="submit" name="secured-edit" value="Edit">
-	</form>
+	<div class="container-fluid">
+		<div class="row justify-content-center text-center mt-5">
+			<div class="col-md-6">
+				<form action="services/edit.php" method="post" enctype="multipart/form-data">
+					<div class="form-group">
+						<label for="info">Profile info: </label>
+						<textarea class="form-control" id="info" name="info"><?php echo $user[0]["info"]; ?></textarea>
+						<?php
+							if (array_key_exists("info", $errors)) {
+								foreach ($errors["info"] as $error) {
+									echo '<div>'.$error.'</div>';
+								}
+							}
+						?>
+					</div>
+					<div class="form-group">
+						<label for="profile-pic"> Profile picture: </label>
+						<input class="form-control-file border" type="file" id="profile-pic" name="profile-pic">
+						<a class="btn btn-primary my-4" href="services/edit.php?profile-pic=default&user=<?php echo $user[0]["user_id"]; ?>">Set default profile picture</a>
+						<?php
+							if (array_key_exists("snapping", $errors)) {
+								foreach ($errors["snapping"] as $error) {
+									echo '<div>'.$error.'</div>';
+								}
+							}
+						?>
+					</div>
+					<input type="hidden" name="user_id" value="<?php echo $user[0]["user_id"]; ?>">
+					<input class="btn btn-primary" type="submit" name="edit" value="Edit">
+				</form>
+			</div>
+			<div class="col-md-6">
+				<form action="services/edit.php" method="post">
+					<div class="form-group">
+						<label for="username">Username:</label>
+						<input class="form-control" type="text" name="username" 
+						value="<?php echo $user[0]["username"]; ?>" id="username">
+						<?php
+							if (array_key_exists("username", $errors)) {
+								foreach ($errors["username"] as $error) {
+									echo '<div>'.$error.'</div>';
+								}
+							}
+						?>
+					</div>
+					<div class="form-group">
+						<label for="password">Password:</label>
+						<input class="form-control" type="password" name="password" id="password">
+						<?php
+							if (array_key_exists("password", $errors)) {
+								foreach ($errors["password"] as $error) {
+									echo '<div>'.$error.'</div>';
+								}
+							}
+						?>
+					</div>
+					<div class="form-group">
+						<label for="confirm_password">Confirm password:</label>
+						<input class="form-control" type="password" name="confirm_password" id="confirm_password">
+						<?php
+							if (array_key_exists("confirm_password", $errors)) {
+								foreach ($errors["confirm_password"] as $error) {
+									echo '<div>'.$error.'</div>';
+								}
+							}
+						?>
+					</div>
+					<div class="form-group">
+					<label for="email">Email:</label>
+					<input class="form-control" type="text" name="email" value="<?php echo $user[0]["email"] ?>"
+					 id="email">
+					<?php
+						if (array_key_exists("email", $errors)) {
+							foreach ($errors["email"] as $error) {
+								echo '<div>'.$error.'</div>';
+							}
+						}
+					?>
+					</div>
+					<div class="form-group">
+					<label for="pass_auth">Authentication password:</label>
+					<input class="form-control" type="password" name="pass_auth" id="pass_auth">
+					<?php
+						if (array_key_exists("pass_auth", $errors)) {
+							foreach ($errors["pass_auth"] as $error) {
+								echo '<div>'.$error.'</div>';
+							}
+						}
+					?>
+					</div>
+					<input type="hidden" name="user_id" value="<?php echo $user[0]["user_id"]; ?>">
+					<input class="btn btn-primary" type="submit" name="secured-edit" value="Edit">
+				</form>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
 <?php
