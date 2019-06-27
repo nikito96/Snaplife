@@ -102,14 +102,14 @@
 	?>
 	<?php
 			echo '<div class="row justify-content-center">';
-  			echo '<div class="col-md-12 m-3">';
+  			echo '<div class="col-*-* m-3">';
 			echo '<a href="index.php"><img src="img\snaplife_logo.jpg" /></a>';
   			echo '</div>';
   			echo '</div>';
 		}
 	?>
 		<div class="row justify-content-center">
-  			<div class="col-md-12">
+  			<div class="col-*-*">
 	<?php
 		$stmt = $conn->prepare("SELECT * FROM liked_snapping WHERE fk_snapping_id = :snapping_id");
 		$stmt->bindParam(":snapping_id", $snapping[0]["snapping_id"]);
@@ -118,56 +118,56 @@
 			
 		$likes = count($likes);
 		echo '<div class="row">';
-		echo '<div class="col-md-12">';
+		echo '<div class="col-*-*">';
 		echo '<a href="profile.php?user='.$snapping[0]["username"].'">
 		<img src="profile_pics/'.$snapping[0]["profile_pic"].'" />
 		'.$snapping[0]["username"].'</a>';
 		echo '</div>';
 		echo '</div>';
 		if(strlen($snapping[0]["real_world_location"]) > 0){
-            echo '<div class="row"><div class="col-md-12">
+            echo '<div class="row"><div class="col-*-*">
                 Location: '.$snapping[0]["real_world_location"].'</div></div>';
         }
 		echo '<div class="row">';
-		echo '<div class="col-md-12">';
+		echo '<div class="col-*-*">';
 		echo '<img class="snapping" src="snappings/'.$snapping[0]["location"].'"/>';
 		echo '</div>';
 		echo '</div>';
 		echo '<div class="row">';
-		echo '<div class="col-md-12">';
+		echo '<div class="col-*-*">';
 		echo '<div>Uploaded on '.$snapping[0]["date"].'</div>';
 		echo '</div>';
 		echo '</div>';
 		echo '<div class="row">';
-		echo '<div class="col-md-12">';
+		echo '<div class="col-*-*">';
 		echo '<div>'.$snapping[0]["description"].'</div>';
 		echo '</div>';
 		echo '</div>';
 		if (strlen($snapping[0]["tags"]) > 0) {
 			echo '<div class="row">';
-			echo '<div class="col-md-12">';
+			echo '<div class="col-*-*">';
 			echo '<div>tags: '.$snapping[0]["tags"].'</div>';
 			echo '</div>';
 			echo '</div>';
 		}
 		echo '<div class="row">';
-		echo '<div class="col-md-12">';
+		echo '<div class="col-*-*">';
 		if (isset($_SESSION["user"])) {
 			buttonLikeDislike($snapping_id, $user_id, $conn);
 		}
 		echo '</div>';
-		echo '<div class="col-md-12">';
+		echo '<div class="col-*-*">';
 		echo '<div class="m-1" id="likes">'.$likes.'</div>';
 		echo '</div>';
-		echo '<div class="col-md-12">';
+		echo '<div class="col-*-*">';
 		echo '<div class="m-1">likes</div>';
 		echo '</div>';
 		if (isset($_SESSION["user"]) && (0 == strcmp($user_id, $snapping[0]["fk_user_id"]) || 
 			0 == strcmp($_SESSION["permission"], "ADMIN"))) {
-			echo '<div class="col-md-12">';
+			echo '<div class="col-*-*">';
 			echo '<a class="btn btn-primary m-1" href="editSnapping.php?snapping='.$snapping_id.'">Edit</a>';
 			echo '</div>';
-			echo '<div class="col-md-12">';
+			echo '<div class="col-*-*">';
 			echo '<button class="btn btn-primary m-1" onclick="deleteSnapping('.$snapping_id.')">Delete</button>';
 			echo '</div>';
 		}

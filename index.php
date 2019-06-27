@@ -19,12 +19,12 @@
 	<body>
 		<div class="container">
   			<div class="row justify-content-center">
-  				<div class="col-md-12 m-5">
+  				<div class="col-*-* m-5">
 					<a href="index.php"><img src="img\snaplife_logo.jpg" /></a>
   				</div>
   			</div>
 			<div class="row justify-content-center text-center">
-				<div class="col-md-12 border border-primary rounded p-2">
+				<div class="col-*-* border border-primary rounded p-2">
 					<form action="services/login.php" method="post">
 						<div class="form-group m-5">
 							<label for="email">Email:</label>
@@ -45,7 +45,7 @@
 				</div>
 			</div>
 			<div class="row justify-content-center">
-				<div class="col-md-12 m-3">
+				<div class="col-*-* m-3">
 					<a class="btn btn-primary" role="button" href="register.php">Register</a>
 				</div>
 			</div>

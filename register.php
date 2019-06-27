@@ -17,12 +17,12 @@
 <body>
 	<div class="container">
 		<div class="row justify-content-center">
-  			<div class="col-md-12 m-5">
+  			<div class="col-*-* m-5">
   				<a href="index.php"><img src="img\snaplife_logo.jpg" /></a>
   			</div>
   		</div>
 		<div class="row justify-content-center text-center">
-			<div class="col-md-12 border border-primary rounded p-2">
+			<div class="col-*-* border border-primary rounded p-2">
 				<?php
 					$errors = array();
 					
