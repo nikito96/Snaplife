@@ -53,7 +53,7 @@
 	</nav>
 	<div class="container-fluid">
 		<div class="row justify-content-center text-center">
-			<div class="col-*-* border border-primary rounded p-3 mt-5">
+			<div class="col-md-12 border border-primary rounded p-3 mt-5">
 				<form action="services/uploadSnapping.php" method="post" enctype="multipart/form-data">
 					<div class="form-group">
 						<label for="snapping">Snapping:</label>

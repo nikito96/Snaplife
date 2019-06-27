@@ -57,7 +57,7 @@
 	</nav>
 	<div class="container-fluid">
 		<div class="row justify-content-center text-center">
-			<div class="col-*-* border border-primary rounded p-2 m-5">
+			<div class="col-md-12 border border-primary rounded p-2 m-5">
 				<form action="services/edit.php" method="post">
 					<input type="hidden" name="snapping_id" value="<?php echo $snapping_id; ?>">
 					<div class="form-group m-3">

@@ -66,7 +66,7 @@
 	</nav>
 	<div class="container-fluid">
 		<div class="row justify-content-center text-center">
-			<div class="col-*-*">
+			<div class="col-md-12">
 				<table class="m-5 border border-info">
 					<tr>
 						<th colspan="3">Profiles</th>
@@ -85,7 +85,7 @@
 ?>
 				</table>
 			</div>
-			<div class="col-*-*">
+			<div class="col-md-12">
 				<table class="m-5 border border-info">
 					<tr>
 						<th colspan="3">Snappings:</th>

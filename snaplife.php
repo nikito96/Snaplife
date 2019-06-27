@@ -90,7 +90,7 @@
 	</nav>
 	<div class="container text-primary">
 		<div class="row justify-content-center">
-			<div class="col-*-*">
+			<div class="col-md-12">
 				<div id="postList">
 <?php
 	try{
@@ -116,36 +116,36 @@
 				$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
 				$user = $stmt->fetchAll();
 				echo '<div class="row">';
-				echo '<div class="col-*-*">';
-				echo '<div class="row"><div class="col-*-*"><a href="profile.php?user='.$user[0]["username"].'">
+				echo '<div class="col-md-12">';
+				echo '<div class="row"><div class="col-md-12"><a href="profile.php?user='.$user[0]["username"].'">
 				<img class="profile_pic" src="profile_pics/'.$user[0]["profile_pic"].'"/></div>
-				<div class="col-*-*">'.$user[0]["username"].'</div></a></div>';
+				<div class="col-md-12">'.$user[0]["username"].'</div></a></div>';
 				if(strlen($snapping["real_world_location"]) > 0){
-                    echo '<div class="row"><div class="col-*-*">
+                    echo '<div class="row"><div class="col-md-12">
                     Location: '.$snapping["real_world_location"].'</div></div>';
                 }
-                echo '<div class="row"><div class="col-*-*">';
+                echo '<div class="row"><div class="col-md-12">';
 				echo '<a href="snapping.php?snapping='.$snapping["snapping_id"].'">
 				<img class="img-fluid snapping" src="snappings/'.$snapping["location"].'"/></a>';
 				echo '</div></div>';
-				echo '<div class="row"><div class="col-*-*">';
+				echo '<div class="row"><div class="col-md-12">';
 				echo '<div>Uploaded on '.$snapping["date"].'</div>';
 				echo '</div></div>';
-				echo '<div class="row"><div class="col-*-*">';
+				echo '<div class="row"><div class="col-md-12">';
 				echo '<div>'.$snapping["description"].'</div>';
 				echo '</div></div>';
 				if (strlen($snapping["tags"]) > 0) {
-					echo '<div class="row"><div class="col-*-*">';
+					echo '<div class="row"><div class="col-md-12">';
 					echo '<div>tags: '.$snapping["tags"].'</div>';
 					echo '</div></div>';
 				}
-				echo '<div class="row"><div class="col-*-*">';
+				echo '<div class="row"><div class="col-md-12">';
 				buttonLikeDislike($snapping["snapping_id"], $_SESSION["user"], $conn);
 				echo '</div>';
-				echo '<div class="col-*-*">';
+				echo '<div class="col-md-12">';
 				echo '<div class="m-1" id="'."snapping".$snapping["snapping_id"].'">'.$likes.'</div>';
 				echo '</div>';
-				echo '<div class="col-*-*">';
+				echo '<div class="col-md-12">';
 				echo '<div class="m-1">likes</div>';
 				echo '</div>';
 				echo '</div>';

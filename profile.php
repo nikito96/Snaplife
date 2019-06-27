@@ -91,22 +91,22 @@
 	</nav>
 	<div class="container">
 		<div class="row justify-content-center m-3">
-			<div class="col-*-*">
+			<div class="col-md-12">
 				<h1><?php echo $user[0]["username"]; ?></h1>
 			</div>
-			<div class="col-*-*">
+			<div class="col-md-12">
 				<img src="profile_pics/<?php echo $user[0]["profile_pic"] ?>"/>
 			</div>
 		</div>
 		<div class="row justify-content-center">
-			<div class="col-*-*">
+			<div class="col-md-12">
 				<div><?php echo $user[0]["info"]; ?></div>
 			</div>
 		</div>
 		<div class="row justify-content-center">
 	<?php
 		if (0 == strcmp($_SESSION["permission"], "ADMIN")) {
-			echo '<div class="col-*-*">';
+			echo '<div class="col-md-12">';
 			if (0 == strcmp($user[0]["permission"], "USER")) {
 				echo '<a class="btn btn-primary m-3" 
 				href="services/admin.php?admin=true&user='.$user[0]["user_id"].'">Make admin</a>';
@@ -119,7 +119,7 @@
 
 		if(isset($_SESSION["user"]) && (0 == strcmp($username, $_SESSION["username"]) 
 			|| 0 == strcmp($_SESSION["permission"], "ADMIN"))){
-			echo '<div class="col-*-*">';
+			echo '<div class="col-md-12">';
 			echo '<a class="btn btn-primary m-3" href="editProfile.php?user='.$user[0]["user_id"].'">Edit</a>';
 			echo '</div>';
 		}
@@ -127,7 +127,7 @@
 	?>
 		</div>
 		<div class="row justify-content-center">
-			<div class="col-*-*">
+			<div class="col-md-12">
 				<div id="postList">
 <?php
 	require_once("services/dbConn.php");
@@ -156,36 +156,36 @@
 				$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
 				$user = $stmt->fetchAll();
 				echo '<div class="row">';
-				echo '<div class="col-*-*">';
-				echo '<div class="row"><div class="col-*-*"><a href="profile.php?user='.$user[0]["username"].'">
+				echo '<div class="col-md-12">';
+				echo '<div class="row"><div class="col-md-12"><a href="profile.php?user='.$user[0]["username"].'">
 				<img class="profile_pic" src="profile_pics/'.$user[0]["profile_pic"].'"/></div>
-				<div class="col-*-*">'.$user[0]["username"].'</div></a></div>';
+				<div class="col-md-12">'.$user[0]["username"].'</div></a></div>';
 				if(strlen($snapping["real_world_location"]) > 0){
-                    echo '<div class="row"><div class="col-*-*">
+                    echo '<div class="row"><div class="col-md-12">
                     Location: '.$snapping["real_world_location"].'</div></div>';
                 }
-                echo '<div class="row"><div class="col-*-*">';
+                echo '<div class="row"><div class="col-md-12">';
 				echo '<a href="snapping.php?snapping='.$snapping["snapping_id"].'">
 				<img class="img-fluid snapping" src="snappings/'.$snapping["location"].'"/></a>';
 				echo '</div></div>';
-				echo '<div class="row"><div class="col-*-*">';
+				echo '<div class="row"><div class="col-md-12">';
 				echo '<div>Uploaded on '.$snapping["date"].'</div>';
 				echo '</div></div>';
-				echo '<div class="row"><div class="col-*-*">';
+				echo '<div class="row"><div class="col-md-12">';
 				echo '<div>'.$snapping["description"].'</div>';
 				echo '</div></div>';
 				if (strlen($snapping["tags"]) > 0) {
-					echo '<div class="row"><div class="col-*-*">';
+					echo '<div class="row"><div class="col-md-12">';
 					echo '<div>tags: '.$snapping["tags"].'</div>';
 					echo '</div></div>';
 				}
-				echo '<div class="row"><div class="col-*-*">';
+				echo '<div class="row"><div class="col-md-12">';
 				buttonLikeDislike($snapping["snapping_id"], $_SESSION["user"], $conn);
 				echo '</div>';
-				echo '<div class="col-*-*">';
+				echo '<div class="col-md-12">';
 				echo '<div class="m-1" id="'."snapping".$snapping["snapping_id"].'">'.$likes.'</div>';
 				echo '</div>';
-				echo '<div class="col-*-*">';
+				echo '<div class="col-md-12">';
 				echo '<div class="m-1">likes</div>';
 				echo '</div>';
 				echo '</div>';
