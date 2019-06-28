@@ -91,6 +91,11 @@
 	<div class="container text-primary">
 		<div class="row justify-content-center">
 			<div class="col-*-*">
+				<div id="left-ad" class="border border-primary ad">
+					Place for ads, cobtact administrator for more info
+				</div>
+			</div>
+			<div class="col-*-*">
 				<div id="postList">
 <?php
 	try{
@@ -160,6 +165,11 @@
    		echo "Connection failed: " . $e->getMessage();
 	}
 ?>
+				</div>
+			</div>
+			<div class="col-*-*">
+				<div id="right-ad" class="border border-primary ad">
+					Place for ads, cobtact administrator for more info
 				</div>
 			</div>
 		</div>
