@@ -4,7 +4,9 @@
 	$username = $_GET["user"];
 
 	try {
-		$stmt = $conn->prepare("SELECT * FROM account WHERE username=:username");
+		$stmt = $conn->prepare("SELECT account.*, permissions.permission 
+			FROM account 
+			INNER JOIN permissions ON account.permission = permissions.permission_id WHERE account.username=:username");
 		$stmt->bindParam(":username", $username);
 		$stmt->execute();
 

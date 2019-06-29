@@ -98,6 +98,7 @@
 			<div class="col-*-*">
 				<div id="postList">
 <?php
+var_dump($_SESSION);
 	try{
 		$stmt = $conn->prepare("SELECT * FROM snapping ORDER BY snapping_id DESC LIMIT 6");
 		$stmt->execute();

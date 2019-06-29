@@ -14,12 +14,12 @@
 	try {
 		if (0 == strcmp($admin, "true")){
 			$stmt = $conn->prepare("UPDATE account
-				SET permission ='ADMIN'
+				SET permission = 1
 					WHERE user_id = $user_id");
 			$stmt->execute();
 		} else {
 			$stmt = $conn->prepare("UPDATE account
-				SET permission = 'USER'
+				SET permission = 2
 					WHERE user_id = $user_id");
 			$stmt->execute();
 		}

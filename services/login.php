@@ -5,8 +5,7 @@
 	$password = $_POST["password"];
 
 	try {
-		$stmt = $conn->prepare("SELECT account.user_id, account.username, account.password, account.permission, 
-			permissions.permission 
+		$stmt = $conn->prepare("SELECT account.user_id, account.username, account.password, permissions.permission 
 			FROM account 
 			INNER JOIN permissions ON account.permission = permissions.permission_id WHERE account.email = :email");
 	    $stmt->bindParam(':email', $email);
@@ -21,7 +20,6 @@
 	    	$_SESSION["permission"] = $user[0]["permission"];
 	    	header("Location: ../snaplife.php");
     	}else{
-    		var_dump($user);
     		header("Location: ../index.php?badLogin=true");
     		session_destroy();
     	}
