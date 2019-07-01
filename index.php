@@ -18,7 +18,7 @@
 		<link rel="stylesheet" type="text/css" href="styles/index.css">
 	</head>
 	<body>
-		<div class="container">
+		<div class="container text-primary">
   			<div class="row justify-content-center">
   				<div class="col-*-* m-5">
 					<a href="index.php"><img src="img\snaplife_logo.jpg" /></a>
@@ -38,7 +38,7 @@
 						</div>
 						<?php
 							if (isset($_GET["badLogin"])) {
-								echo '<div class="text-primary mb-2">Wrong email or password!</div>';
+								echo '<div class="mb-2">Wrong email or password!</div>';
 							}
 						?>
 						<input class="btn btn-primary mb-3" type="submit" name="login" value="Login">
