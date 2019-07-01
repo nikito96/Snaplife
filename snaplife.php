@@ -54,6 +54,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
 	<link rel="stylesheet" type="text/css" href="styles/snaplife.css">
+	<link rel="icon" href="favicon.ico" type="image/gif" sizes="16x16">
 	<?php	
 		if (isset($_GET["emptySearch"])) {
 			echo '<script>';
