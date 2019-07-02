@@ -90,14 +90,12 @@
 			</li>-->
 		</ul>
 	</nav>
-	<div class="container text-primary">
+	<div class="container-fluid text-primary">
 		<div class="row justify-content-center">
-			<!--<div class="col-*-*">
-				<div id="left-ad" class="border border-primary ad">
-					Place for ads, cobtact administrator for more info
-				</div>
-			</div>-->
-			<div class="col-*-*">
+			<div class="col-md-4">
+				<div class="border border-primary ad">Place for ads, contact admin for info.</div>
+			</div>
+			<div class="col-md-4">
 				<div id="postList">
 <?php
 	try{
@@ -169,11 +167,9 @@
 ?>
 				</div>
 			</div>
-			<!--<div class="col-*-*">
-				<div id="right-ad" class="border border-primary ad">
-					Place for ads, cobtact administrator for more info
-				</div>
-			</div>-->
+			<div class="col-md-4">
+				<div class="border border-primary ad">Place for ads, contact admin for info.</div>
+			</div>
 		</div>
 	</div>
 </body>
